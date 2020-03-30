@@ -1,3 +1,4 @@
+import React, { cloneElement } from "react";
 import React from "react";
 import PhoneIcon from "@material-ui/icons/Phone";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
@@ -16,6 +17,10 @@ import {
   TextInput,
   ReferenceField,
   regex,
+  CreateButton,
+  ExportButton,
+  TopToolbar,
+  sanitizeListRestProps,
   TabbedForm,
   FormTab,
   ArrayField,
@@ -24,6 +29,45 @@ import {
   ArrayInput,
   SimpleFormIterator,
 } from "react-admin";
+
+const ListActions = ({
+  currentSort,
+  className,
+  resource,
+  filters,
+  displayedFilters,
+  exporter, // you can hide ExportButton if exporter = (null || false)
+  filterValues,
+  permanentFilter,
+  hasCreate, // you can hide CreateButton if hasCreate = false
+  basePath,
+  selectedIds,
+  onUnselectItems,
+  showFilter,
+  maxResults,
+  total,
+  ...rest
+}) => (
+  <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
+    {filters &&
+      cloneElement(filters, {
+        resource,
+        showFilter,
+        displayedFilters,
+        filterValues,
+        context: "button",
+      })}
+    <CreateButton basePath={basePath} />
+    <ExportButton
+      disabled={total === 0}
+      resource={resource}
+      sort={currentSort}
+      filter={{ ...filterValues, ...permanentFilter }}
+      exporter={exporter}
+      maxResults={maxResults}
+    />
+  </TopToolbar>
+);
 
 const UserFilter = props => (
   <Filter {...props}>
@@ -42,6 +86,7 @@ export const UserList = props => (
     filters={<UserFilter />}
     filterDefaultValues={{ guests: true, deactivated: false }}
     bulkActionButtons={false}
+    actions={<ListActions maxResults={10000} />}
   >
     <Datagrid rowClick="edit">
       <ReferenceField
