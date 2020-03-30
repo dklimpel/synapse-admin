@@ -16,6 +16,7 @@ import {
   TextInput,
   ReferenceField,
   regex,
+  SearchInput,
   CreateButton,
   ExportButton,
   TopToolbar,
@@ -75,6 +76,7 @@ const ListActions = ({
 
 const UserFilter = props => (
   <Filter {...props}>
+    <SearchInput source="user_id" alwaysOn />
     <BooleanInput source="guests" alwaysOn />
     <BooleanInput
       label="resources.users.fields.show_deactivated"
@@ -102,7 +104,7 @@ export const UserList = props => (
       >
         <ImageField source="avatar_url" title="displayname" />
       </ReferenceField>
-      <TextField source="id" />
+      <TextField source="id" sortable={false} />
       {/* Hack since the users endpoint does not give displaynames in the list*/}
       <ReferenceField
         source="name"

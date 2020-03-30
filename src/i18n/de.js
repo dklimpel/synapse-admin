@@ -44,6 +44,7 @@ export default {
         name: "Name",
         canonical_alias: "Alias",
         joined_members: "Mitglieder",
+        search_term: "Suche",
       },
     },
     connections: {

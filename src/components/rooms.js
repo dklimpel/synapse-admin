@@ -1,17 +1,28 @@
 import React from "react";
-import { Datagrid, List, TextField, Pagination } from "react-admin";
+import { Datagrid, List, TextField, SearchInput, Filter, Pagination } from "react-admin";
+
+const RoomFilter = props => (
+  <Filter {...props}>
+    <SearchInput source="search_term" alwaysOn />
+  </Filter>
+);
 
 const RoomPagination = props => (
   <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
 );
 
 export const RoomList = props => (
-  <List {...props} pagination={<RoomPagination />}>
+  <List
+    {...props}
+    pagination={<RoomPagination />}
+    sort={{ field: "alphabetical", order: "DESC" }}
+    filters={<RoomFilter />}
+  >
     <Datagrid>
-      <TextField source="room_id" />
-      <TextField source="name" />
-      <TextField source="canonical_alias" />
-      <TextField source="joined_members" />
+      <TextField source="room_id" sortable={false} />
+      <TextField source="name" sortBy="alphabetical" />
+      <TextField source="canonical_alias" sortable={false} />
+      <TextField source="joined_members" sortBy="size" />
     </Datagrid>
   </List>
 );
