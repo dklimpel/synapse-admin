@@ -20,6 +20,9 @@ import {
   FormTab,
   ArrayField,
   DateField,
+  SelectInput,
+  ArrayInput,
+  SimpleFormIterator,
 } from "react-admin";
 
 const UserFilter = props => (
@@ -77,6 +80,18 @@ export const UserCreate = props => (
     <SimpleForm>
       <TextInput source="id" autoComplete="off" validate={validateUser} />
       <TextInput source="displayname" />
+      <ArrayInput source="threepids">
+        <SimpleFormIterator>
+          <SelectInput
+            source="medium"
+            choices={[
+              { id: "email", name: "resources.users.email" },
+              { id: "msisdn", name: "resources.users.msisdn" },
+            ]}
+          />
+          <TextInput source="address" />
+        </SimpleFormIterator>
+      </ArrayInput>
       <PasswordInput source="password" autoComplete="new-password" />
       <BooleanInput source="admin" />
     </SimpleForm>
@@ -87,11 +102,24 @@ export const UserEdit = props => (
   <Edit {...props}>
     <TabbedForm>
       <FormTab label="resources.users.name" icon={<PersonPinIcon />}>
-        <TextInput source="id" disabled />
-        <TextInput source="displayname" />
-        <PasswordInput source="password" autoComplete="new-password" />
-        <BooleanInput source="admin" />
-        <BooleanInput source="deactivated" />
+      <TextInput source="id" disabled />
+      <TextInput source="avatar_url" disabled />
+      <TextInput source="displayname" />
+      <ArrayInput source="threepids">
+        <SimpleFormIterator>
+          <SelectInput
+            source="medium"
+            choices={[
+              { id: "email", name: "resources.users.email" },
+              { id: "msisdn", name: "resources.users.msisdn" },
+            ]}
+          />
+          <TextInput source="address" />
+        </SimpleFormIterator>
+      </ArrayInput>
+      <PasswordInput source="password" autoComplete="new-password" />
+      <BooleanInput source="admin" />
+      <BooleanInput source="deactivated" />
       </FormTab>
       <FormTab label="resources.connections.name" icon={<PhoneIcon />}>
         <ReferenceField reference="connections" source="id" addLabel={false}>
