@@ -1,5 +1,4 @@
 import React, { cloneElement } from "react";
-import React from "react";
 import PhoneIcon from "@material-ui/icons/Phone";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import {
