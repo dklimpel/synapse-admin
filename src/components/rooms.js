@@ -1,5 +1,5 @@
 import React from "react";
-import { Datagrid, List, TextField, SearchInput, Filter } from "react-admin";
+import { Datagrid, List, TextField, SearchInput, Filter, Pagination } from "react-admin";
 
 const RoomFilter = props => (
   <Filter {...props}>
@@ -7,9 +7,14 @@ const RoomFilter = props => (
   </Filter>
 );
 
+const RoomPagination = props => (
+  <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
+);
+
 export const RoomList = props => (
   <List
     {...props}
+    pagination={<RoomPagination />}
     sort={{ field: "alphabetical", order: "DESC" }}
     filters={<RoomFilter />}
   >
