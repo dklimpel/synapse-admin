@@ -34,8 +34,6 @@ const UserPagination = props => (
   <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
 );
 
-} from "react-admin";
-
 const ListActions = ({
   currentSort,
   className,
