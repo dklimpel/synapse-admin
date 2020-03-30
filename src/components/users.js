@@ -28,6 +28,13 @@ import {
   SelectInput,
   ArrayInput,
   SimpleFormIterator,
+  Pagination,
+} from "react-admin";
+
+const UserPagination = props => (
+  <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
+);
+
 } from "react-admin";
 
 const ListActions = ({
@@ -86,6 +93,7 @@ export const UserList = props => (
     filters={<UserFilter />}
     filterDefaultValues={{ guests: true, deactivated: false }}
     bulkActionButtons={false}
+    pagination={<UserPagination />}
     actions={<ListActions maxResults={10000} />}
   >
     <Datagrid rowClick="edit">
