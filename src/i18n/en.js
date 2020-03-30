@@ -15,6 +15,7 @@ export default {
   resources: {
     users: {
       name: "User |||| Users",
+      backtolist: "Back to list",
       email: "Email",
       msisdn: "Phone",
       fields: {
@@ -42,6 +43,14 @@ export default {
         name: "Name",
         canonical_alias: "Alias",
         joined_members: "Members",
+      },
+    },
+    connections: {
+      name: "Connections",
+      fields: {
+        last_seen: "Date",
+        ip: "IP address",
+        user_agent: "User agent",
       },
     },
   },
