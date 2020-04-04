@@ -171,7 +171,10 @@ export const UserEdit = props => (
       </ArrayInput>
       <PasswordInput source="password" autoComplete="new-password" />
       <BooleanInput source="admin" />
-      <BooleanInput source="deactivated" />
+      <BooleanInput
+        source="deactivated"
+        helperText="resources.users.helper.deactivated"
+      />
       </FormTab>
       <FormTab label="resources.connections.name" icon={<PhoneIcon />}>
         <ReferenceField reference="connections" source="id" addLabel={false}>

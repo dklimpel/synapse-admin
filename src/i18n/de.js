@@ -36,6 +36,10 @@ export default {
         threepids: "3PIDs",
         address: "Adresse",
       },
+      helper: {
+        deactivated:
+          "Deaktivierte Nutzer können nicht wieder aktiviert werden.",
+      },
     },
     rooms: {
       name: "Raum |||| Räume",
