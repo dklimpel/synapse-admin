@@ -26,7 +26,9 @@ const resourceMap = {
     }),
     data: "users",
     total: (json, from, perPage) => {
-      return json.next_token ? parseInt(json.next_token, 10) + perPage : from + json.users.length;
+      return json.next_token
+        ? parseInt(json.next_token, 10) + perPage
+        : from + json.users.length;
     },
     delete_path: "/_synapse/admin/v1/deactivate",
   },
@@ -44,6 +46,14 @@ const resourceMap = {
     },
     delete_path: "/_synapse/admin/v1/purge_room",
   },
+  connections: {
+    path: "/_synapse/admin/v1/whois",
+    map: c => ({
+      ...c,
+      id: c.user_id,
+    }),
+    data: "connections",
+  },
 };
 
 function filterNullValues(key, value) {
@@ -57,8 +67,14 @@ function filterNullValues(key, value) {
 const dataProvider = {
   getList: (resource, params) => {
     console.log("getList " + resource);
-    const { user_id, guests, deactivated } = params.filter;
+    const { user_id, guests, deactivated, search_term } = params.filter;
     const { page, perPage } = params.pagination;
+    var { field, order } = params.sort;
+    if (order === "DESC") {
+      order = "b";
+    } else {
+      order = "f";
+    }
     const from = (page - 1) * perPage;
     const query = {
       from: from,
@@ -66,6 +82,9 @@ const dataProvider = {
       user_id: user_id,
       guests: guests,
       deactivated: deactivated,
+      order_by: field,
+      search_term: search_term,
+      dir: order,
     };
     const homeserver = localStorage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) return Promise.reject();

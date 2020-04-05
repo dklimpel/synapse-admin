@@ -6,6 +6,7 @@ export default {
     auth: {
       homeserver: "Homeserver",
       welcome: "Welcome to Synapse-admin",
+      force_server: "Force homeserver address",
     },
     users: {
       invalid_user_id:
@@ -15,6 +16,9 @@ export default {
   resources: {
     users: {
       name: "User |||| Users",
+      backtolist: "Back to list",
+      email: "Email",
+      msisdn: "Phone",
       fields: {
         avatar: "Avatar",
         id: "User-ID",
@@ -27,6 +31,13 @@ export default {
         user_id: "Search user",
         displayname: "Displayname",
         password: "Password",
+        avatar_url: "Avatar URL",
+        medium: "Medium",
+        threepids: "3PIDs",
+        address: "Address",
+      },
+      helper: {
+        deactivated: "Deactivated users cannot be reactivated",
       },
     },
     rooms: {
@@ -36,6 +47,15 @@ export default {
         name: "Name",
         canonical_alias: "Alias",
         joined_members: "Members",
+        search_term: "Search",
+      },
+    },
+    connections: {
+      name: "Connections",
+      fields: {
+        last_seen: "Date",
+        ip: "IP address",
+        user_agent: "User agent",
       },
     },
   },
