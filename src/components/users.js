@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
+import DevicesIcon from "@material-ui/icons/Devices";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
 import {
   ArrayInput,
@@ -30,8 +31,10 @@ import {
   regex,
   useTranslate,
   Pagination,
+  SearchInput,
 } from "react-admin";
 import { ServerNoticeButton, ServerNoticeBulkButton } from "./ServerNotices";
+import { RemoveDeviceButton } from "./devices";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -52,6 +55,7 @@ const UserPagination = props => (
 
 const UserFilter = props => (
   <Filter {...props}>
+    <SearchInput source="user_id" alwaysOn />
     <BooleanInput source="guests" alwaysOn />
     <BooleanInput
       label="resources.users.fields.show_deactivated"
@@ -161,10 +165,14 @@ const UserTitle = ({ record }) => {
 };
 export const UserEdit = props => {
   const classes = useStyles();
+  const translate = useTranslate();
   return (
     <Edit {...props} title={<UserTitle />}>
       <TabbedForm toolbar={<UserEditToolbar />}>
-        <FormTab label="resources.users.name" icon={<PersonPinIcon />}>
+        <FormTab
+          label={translate("resources.users.name", { smart_count: 1 })}
+          icon={<PersonPinIcon />}
+        >
           <AvatarField
             source="avatar_src"
             sortable={false}
@@ -209,6 +217,40 @@ export const UserEdit = props => {
               <TextInput source="address" />
             </SimpleFormIterator>
           </ArrayInput>
+        </FormTab>
+        <FormTab
+          label={translate("resources.devices.name", { smart_count: 2 })}
+          icon={<DevicesIcon />}
+          path="devices"
+        >
+          <ReferenceField
+            reference="devices"
+            source="id"
+            addLabel={false}
+            link={false}
+          >
+            <ArrayField source="devices" label="resources.devices.name">
+              <Datagrid style={{ width: "100%" }}>
+                <TextField source="device_id" sortable={false} />
+                <TextField source="display_name" sortable={false} />
+                <TextField source="last_seen_ip" sortable={false} />
+                <DateField
+                  source="last_seen_ts"
+                  showTime
+                  options={{
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  }}
+                  sortable={false}
+                />
+                <RemoveDeviceButton />
+              </Datagrid>
+            </ArrayField>
+          </ReferenceField>
         </FormTab>
         <FormTab
           label="resources.connections.name"

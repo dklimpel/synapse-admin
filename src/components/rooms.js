@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import {
   BooleanField,
@@ -11,6 +11,10 @@ import {
   Tab,
   TabbedShowLayout,
   TextField,
+  BulkDeleteButton,
+  Filter,
+  SearchInput,
+  BooleanField,
   useTranslate,
 } from "react-admin";
 import get from "lodash/get";
@@ -24,6 +28,19 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 const RoomPagination = props => (
   <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
 );
+
+const RoomBulkActionButtons = props => {
+  const translate = useTranslate();
+  return (
+    <Fragment>
+      <BulkDeleteButton
+        {...props}
+        label="resources.rooms.action.purge"
+        title={translate("resources.rooms.helper.purge")}
+      />
+    </Fragment>
+  );
+};
 
 const EncryptionField = ({ source, record = {}, emptyText }) => {
   const translate = useTranslate();
@@ -150,10 +167,12 @@ export const RoomShow = props => {
     </Show>
   );
 };
+                     
 const RoomFilter = ({ ...props }) => {
   const translate = useTranslate();
   return (
     <Filter {...props}>
+      <SearchInput source="search_term" alwaysOn />
       <Chip
         label={translate("resources.rooms.fields.joined_local_members")}
         source="joined_local_members"
