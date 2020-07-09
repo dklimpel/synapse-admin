@@ -31,6 +31,7 @@ import {
   regex,
   useTranslate,
   Pagination,
+  SearchInput,
 } from "react-admin";
 import { ServerNoticeButton, ServerNoticeBulkButton } from "./ServerNotices";
 import { RemoveDeviceButton } from "./devices";
@@ -54,6 +55,7 @@ const UserPagination = props => (
 
 const UserFilter = props => (
   <Filter {...props}>
+    <SearchInput source="user_id" alwaysOn />
     <BooleanInput source="guests" alwaysOn />
     <BooleanInput
       label="resources.users.fields.show_deactivated"

@@ -115,6 +115,14 @@ function filterNullValues(key, value) {
   return value;
 }
 
+function getEncodeURI(value) {
+  // encodeURI if 'value' is set
+  if (value) {
+    return encodeURI(value);
+  }
+  return undefined;
+}
+
 function getSearchOrder(order) {
   if (order === "DESC") {
     return "b";
@@ -126,16 +134,17 @@ function getSearchOrder(order) {
 const dataProvider = {
   getList: (resource, params) => {
     console.log("getList " + resource);
-    const { user_id, guests, deactivated } = params.filter;
+    const { user_id, guests, deactivated, search_term } = params.filter;
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const from = (page - 1) * perPage;
     const query = {
       from: from,
       limit: perPage,
-      user_id: user_id,
+      user_id: getEncodeURI(user_id),
       guests: guests,
       deactivated: deactivated,
+      search_term: getEncodeURI(search_term),
       order_by: field,
       dir: getSearchOrder(order),
     };

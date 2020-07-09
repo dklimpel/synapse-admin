@@ -4,6 +4,8 @@ import {
   List,
   TextField,
   Pagination,
+  Filter,
+  SearchInput,
   BooleanField,
   useTranslate,
 } from "react-admin";
@@ -14,6 +16,12 @@ import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
 
 const RoomPagination = props => (
   <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
+);
+
+const RoomFilter = props => (
+  <Filter {...props}>
+    <SearchInput source="search_term" alwaysOn />
+  </Filter>
 );
 
 const EncryptionField = ({ source, record = {}, emptyText }) => {
@@ -47,6 +55,7 @@ export const RoomList = props => (
     {...props}
     pagination={<RoomPagination />}
     sort={{ field: "name", order: "ASC" }}
+    filters={<RoomFilter />}
   >
     <Datagrid>
       <EncryptionField
