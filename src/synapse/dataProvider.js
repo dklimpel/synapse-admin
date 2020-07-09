@@ -14,24 +14,35 @@ const jsonClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 };
 
+const mxcUrlToHttp = mxcUrl => {
+  const homeserver = localStorage.getItem("base_url");
+  const re = /^mxc:\/\/([^/]+)\/(\w+)/;
+  var ret = re.exec(mxcUrl);
+  console.log("mxcClient " + ret);
+  if (ret == null) return null;
+  const serverName = ret[1];
+  const mediaId = ret[2];
+  return `${homeserver}/_matrix/media/r0/thumbnail/${serverName}/${mediaId}?width=24&height=24&method=scale`;
+};
+
 const resourceMap = {
   users: {
     path: "/_synapse/admin/v2/users",
     map: u => ({
       ...u,
       id: u.name,
+      avatar_src: mxcUrlToHttp(u.avatar_url),
       is_guest: !!u.is_guest,
       admin: !!u.admin,
       deactivated: !!u.deactivated,
       // need timestamp in milliseconds
       creation_ts_ms: u.creation_ts * 1000,
     }),
+    total: json => json.total,
     data: "users",
-    total: (json, from, perPage) => {
-      return json.next_token
-        ? parseInt(json.next_token, 10) + perPage
-        : from + json.users.length;
-    },
+    getMany: id => ({
+      endpoint: `/_synapse/admin/v2/users/${id}`,
+    }),
     create: data => ({
       endpoint: `/_synapse/admin/v2/users/${data.id}`,
       body: data,
@@ -64,13 +75,26 @@ const resourceMap = {
       method: "POST",
     }),
   },
+  devices: {
+    path: "/_synapse/admin/v2/users",
+    map: d => ({
+      ...d,
+      id: d.devices[0].user_id,
+    }),
+    data: "devices",
+    getMany: id => ({
+      endpoint: `/_synapse/admin/v2/users/${id}/devices`,
+    }),
+  },
   connections: {
-    path: "/_synapse/admin/v1/whois",
     map: c => ({
       ...c,
       id: c.user_id,
     }),
     data: "connections",
+    getMany: id => ({
+      endpoint: `/_synapse/admin/v1/whois/${id}`,
+    }),
   },
   servernotices: {
     map: n => ({ id: n.event_id }),
@@ -96,6 +120,14 @@ function filterNullValues(key, value) {
   return value;
 }
 
+function getEncodeURI(value) {
+  // encodeURI if 'value' is set
+  if (value) {
+    return encodeURI(value);
+  }
+  return undefined;
+}
+
 function getSearchOrder(order) {
   if (order === "DESC") {
     return "b";
@@ -107,16 +139,17 @@ function getSearchOrder(order) {
 const dataProvider = {
   getList: (resource, params) => {
     console.log("getList " + resource);
-    const { user_id, guests, deactivated } = params.filter;
+    const { user_id, guests, deactivated, search_term } = params.filter;
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const from = (page - 1) * perPage;
     const query = {
       from: from,
       limit: perPage,
-      user_id: user_id,
+      user_id: getEncodeURI(user_id),
       guests: guests,
       deactivated: deactivated,
+      search_term: getEncodeURI(search_term),
       order_by: field,
       dir: getSearchOrder(order),
     };
@@ -153,10 +186,14 @@ const dataProvider = {
     if (!homeserver || !(resource in resourceMap)) return Promise.reject();
 
     const res = resourceMap[resource];
+    if (!("getMany" in res)) return Promise.reject();
 
-    const endpoint_url = homeserver + res.path;
     return Promise.all(
-      params.ids.map(id => jsonClient(`${endpoint_url}/${id}`))
+      params.ids.map(id => {
+        const getMany = res["getMany"](id);
+        const endpoint_url = homeserver + getMany.endpoint;
+        return jsonClient(endpoint_url);
+      })
     ).then(responses => ({
       data: responses.map(({ json }) => res.map(json)),
     }));
@@ -325,6 +362,24 @@ const dataProvider = {
         data: responses.map(({ json }) => json),
       }));
     }
+  },
+
+  removeDevice: (resource, params) => {
+    console.log("removeDevice " + resource);
+    const homeserver = localStorage.getItem("base_url");
+    if (!homeserver || !(resource in resourceMap)) return Promise.reject();
+
+    const res = resourceMap[resource];
+    const endpoint_url = homeserver + res.path;
+
+    return jsonClient(
+      `${endpoint_url}/${params.user_id}/devices/${params.device_id}`,
+      {
+        method: "DELETE",
+      }
+    ).then(({ json }) => ({
+      data: json,
+    }));
   },
 };
 

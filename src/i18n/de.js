@@ -36,6 +36,7 @@ export default {
         displayname: "Anzeigename",
         password: "Passwort",
         avatar_url: "Avatar URL",
+        avatar_src: "Avatar",
         medium: "Medium",
         threepids: "3PIDs",
         address: "Adresse",
@@ -78,6 +79,22 @@ export default {
         last_seen: "Datum",
         ip: "IP-Adresse",
         user_agent: "User Agent",
+      },
+    },
+    devices: {
+      name: "Gerät |||| Geräte",
+      fields: {
+        device_id: "Geräte-ID",
+        display_name: "Anzeigename",
+        last_seen_ts: "Zeitstempel",
+        last_seen_ip: "IP-Adresse",
+      },
+      action: {
+        remove_title: "Entferne %{name}: %{id}",
+        remove_content:
+          "Möchten Sie dieses %{name} wirklich entfernen? %{display_name}: %{displayname}",
+        remove_success: "Gerät erfolgreich entfernt.",
+        remove_failure: "Beim Entfernen ist ein Fehler aufgetreten.",
       },
     },
     servernotices: {

@@ -5,6 +5,8 @@ import {
   TextField,
   Pagination,
   BulkDeleteButton,
+  Filter,
+  SearchInput,
   BooleanField,
   useTranslate,
 } from "react-admin";
@@ -29,6 +31,12 @@ const RoomBulkActionButtons = props => {
     </Fragment>
   );
 };
+
+const RoomFilter = props => (
+  <Filter {...props}>
+    <SearchInput source="search_term" alwaysOn />
+  </Filter>
+);
 
 const EncryptionField = ({ source, record = {}, emptyText }) => {
   const translate = useTranslate();
@@ -62,6 +70,7 @@ export const RoomList = props => (
     pagination={<RoomPagination />}
     bulkActionButtons={<RoomBulkActionButtons />}
     sort={{ field: "name", order: "ASC" }}
+    filters={<RoomFilter />}
   >
     <Datagrid>
       <EncryptionField
