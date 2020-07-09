@@ -211,6 +211,7 @@ const FilterableRoomList = ({ ...props }) => {
     <List
       {...props}
       pagination={<RoomPagination />}
+      bulkActionButtons={<RoomBulkActionButtons />}
       sort={{ field: "name", order: "ASC" }}
       filters={<RoomFilter />}
     >
