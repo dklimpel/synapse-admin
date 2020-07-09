@@ -12,9 +12,7 @@ import {
   TabbedShowLayout,
   TextField,
   BulkDeleteButton,
-  Filter,
   SearchInput,
-  BooleanField,
   useTranslate,
 } from "react-admin";
 import get from "lodash/get";
