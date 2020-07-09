@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Datagrid,
   List,
   TextField,
   Pagination,
+  BulkDeleteButton,
   Filter,
   SearchInput,
   BooleanField,
@@ -17,6 +18,19 @@ import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
 const RoomPagination = props => (
   <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
 );
+
+const RoomBulkActionButtons = props => {
+  const translate = useTranslate();
+  return (
+    <Fragment>
+      <BulkDeleteButton
+        {...props}
+        label="resources.rooms.action.purge"
+        title={translate("resources.rooms.helper.purge")}
+      />
+    </Fragment>
+  );
+};
 
 const RoomFilter = props => (
   <Filter {...props}>
@@ -54,6 +68,7 @@ export const RoomList = props => (
   <List
     {...props}
     pagination={<RoomPagination />}
+    bulkActionButtons={<RoomBulkActionButtons />}
     sort={{ field: "name", order: "ASC" }}
     filters={<RoomFilter />}
   >
