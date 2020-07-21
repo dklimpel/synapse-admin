@@ -6,15 +6,12 @@ import {
   Filter,
   List,
   Pagination,
-  BulkDeleteButton,
   SelectField,
   Show,
   Tab,
   TabbedShowLayout,
   TextField,
   useTranslate,
-  Toolbar,
-  DeleteButton,
 } from "react-admin";
 import get from "lodash/get";
 import { Tooltip, Typography, Chip } from "@material-ui/core";
