@@ -102,6 +102,15 @@ const resourceMap = {
     }),
     data: "members",
   },
+  joined_rooms: {
+    map: jr => ({
+      id: jr,
+    }),
+    reference: id => ({
+      endpoint: `/_synapse/admin/v1/users/${id}/joined_rooms`,
+    }),
+    data: "joined_rooms",
+  },
   servernotices: {
     map: n => ({ id: n.event_id }),
     create: data => ({
