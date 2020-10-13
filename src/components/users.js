@@ -348,7 +348,7 @@ export const UserEdit = props => {
           >
             <Datagrid
               style={{ width: "100%" }}
-              rowClick={(id, basePath, record) => "/rooms/" + id}
+              rowClick={(id, basePath, record) => "/rooms/" + id + "/show"}
             >
               <TextField
                 source="id"
