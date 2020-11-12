@@ -25,7 +25,8 @@ export default {
       },
       delete: {
         title: "Raum löschen",
-        message: "Sind Sie sicher dass Sie den Raum löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden. Alle Nachrichten und Medien, die der Raum beinhaltet werden vom Server gelöscht!",
+        message:
+          "Sind Sie sicher dass Sie den Raum löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden. Alle Nachrichten und Medien, die der Raum beinhaltet werden vom Server gelöscht!",
       },
     },
   },
@@ -193,6 +194,19 @@ export default {
           success: "Gerät erfolgreich entfernt.",
           failure: "Beim Entfernen ist ein Fehler aufgetreten.",
         },
+      },
+    },
+    users_media: {
+      name: "Medien",
+      fields: {
+        media_id: "Medien ID",
+        media_length: "Größe",
+        media_type: "Typ",
+        upload_name: "Dateiname",
+        quarantined_by: "Zur Quarantäne hinzugefügt",
+        safe_from_quarantine: "Geschützt vor Quarantäne",
+        created_ts: "Erstellt",
+        last_access_ts: "Letzter Zugriff",
       },
     },
     servernotices: {

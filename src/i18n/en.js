@@ -23,7 +23,8 @@ export default {
       },
       delete: {
         title: "Delete room",
-        message: "Are you sure you want to delete the room? This cannot be undone. All messages and shared media in the room will be deleted from the server!",
+        message:
+          "Are you sure you want to delete the room? This cannot be undone. All messages and shared media in the room will be deleted from the server!",
       },
     },
   },
@@ -191,6 +192,19 @@ export default {
           success: "Device successfully removed.",
           failure: "An error has occurred.",
         },
+      },
+    },
+    users_media: {
+      name: "Media",
+      fields: {
+        media_id: "Media ID",
+        media_length: "Lenght",
+        media_type: "Type",
+        upload_name: "File name",
+        quarantined_by: "Quarantined by",
+        safe_from_quarantine: "Safe from quarantine",
+        created_ts: "Created",
+        last_access_ts: "Last access",
       },
     },
     servernotices: {
