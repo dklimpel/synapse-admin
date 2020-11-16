@@ -218,17 +218,15 @@ const dataProvider = {
     console.log("getManyReference " + resource);
     const { page, perPage } = params.pagination;
     const from = (page - 1) * perPage;
+    const query = {
+      from: from,
+      limit: perPage,
+    };
 
     const homeserver = localStorage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) return Promise.reject();
 
     const res = resourceMap[resource];
-    const { page, perPage } = params.pagination;
-    const from = (page - 1) * perPage;
-    const query = {
-      from: from,
-      limit: perPage,
-    };
 
     const ref = res["reference"](params.id);
     const endpoint_url = `${homeserver}${ref.endpoint}?${stringify(query)}`;
