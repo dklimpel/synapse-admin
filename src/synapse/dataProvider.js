@@ -119,6 +119,7 @@ const resourceMap = {
         "home_server"
       )}/${params.id}`,
     }),
+    total: json => json.total,
   },
   servernotices: {
     map: n => ({ id: n.event_id }),
@@ -209,11 +210,14 @@ const dataProvider = {
       params.ids.map(id => jsonClient(`${endpoint_url}/${id}`))
     ).then(responses => ({
       data: responses.map(({ json }) => res.map(json)),
+      total: responses.length,
     }));
   },
 
   getManyReference: (resource, params) => {
     console.log("getManyReference " + resource);
+    const { page, perPage } = params.pagination;
+    const from = (page - 1) * perPage;
 
     const homeserver = localStorage.getItem("base_url");
     if (!homeserver || !(resource in resourceMap)) return Promise.reject();

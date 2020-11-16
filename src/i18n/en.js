@@ -122,11 +122,6 @@ export default {
         address: "Address",
         creation_ts_ms: "Creation timestamp",
         consent_version: "Consent version",
-        // Devices:
-        device_id: "Device-ID",
-        display_name: "Device name",
-        last_seen_ts: "Timestamp",
-        last_seen_ip: "IP address",
       },
       helper: {
         deactivate: "Deactivated users cannot be reactivated",
@@ -185,6 +180,12 @@ export default {
     },
     devices: {
       name: "Device |||| Devices",
+      fields: {
+        device_id: "Device-ID",
+        display_name: "Device name",
+        last_seen_ts: "Timestamp",
+        last_seen_ip: "IP address",
+      },
       action: {
         erase: {
           title: "Removing %{id}",
