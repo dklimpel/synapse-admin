@@ -119,7 +119,6 @@ const resourceMap = {
         "home_server"
       )}/${params.id}`,
     }),
-    total: json => json.total,
   },
   servernotices: {
     map: n => ({ id: n.event_id }),
