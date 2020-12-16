@@ -145,6 +145,15 @@ const resourceMap = {
       method: "POST",
     }),
   },
+  user_media_statistics: {
+    path: "/_synapse/admin/v1/statistics/users/media",
+    map: usms => ({
+      ...usms,
+      id: usms.user_id,
+    }),
+    data: "users",
+    total: json => json.total,
+  },
 };
 
 function filterNullValues(key, value) {
