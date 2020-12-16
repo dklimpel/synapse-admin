@@ -246,7 +246,6 @@ export default {
         safe_from_quarantine: "Safe from quarantine",
         created_ts: "Created",
         last_access_ts: "Last access",
->>>>>>> refs/remotes/origin/refs/heads/users_media
       },
     },
     servernotices: {
