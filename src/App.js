@@ -10,7 +10,6 @@ import LoginPage from "./components/LoginPage";
 import UserIcon from "@material-ui/icons/Group";
 import RoomIcon from "@material-ui/icons/ViewList";
 import ReportIcon from "@material-ui/icons/Warning";
-import { ViewListIcon as RoomIcon } from "@material-ui/icons/ViewList";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import { UserMediaStatsList } from "./components/statistics";
 import { ImportFeature } from "./components/ImportFeature";
@@ -47,16 +46,15 @@ const App = () => (
     />
     <Resource name="rooms" list={RoomList} show={RoomShow} icon={RoomIcon} />
     <Resource
-<<<<<<< HEAD
       name="reports"
       list={ReportList}
       show={ReportShow}
       icon={ReportIcon}
-=======
+    />
+    <Resource
       name="user_media_statistics"
       list={UserMediaStatsList}
       icon={EqualizerIcon}
->>>>>>> refs/remotes/origin/refs/heads/users_media_list
     />
     <Resource name="connections" />
     <Resource name="devices" />
