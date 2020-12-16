@@ -224,7 +224,6 @@ export default {
         },
       },
     },
-<<<<<<< HEAD
     pushers: {
       name: "Pusher |||| Pushers",
       fields: {
