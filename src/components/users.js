@@ -435,7 +435,7 @@ export const UserEdit = props => {
                 <TextField source="name" sortable={false} />
               </ReferenceField>
             </Datagrid>
-          </ReferenceField>
+          </ReferenceManyField>
         </FormTab>
 
         <FormTab
