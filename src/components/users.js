@@ -407,7 +407,6 @@ export const UserEdit = props => {
         </FormTab>
 
         <FormTab
-<<<<<<< HEAD
           label={translate("resources.rooms.name", { smart_count: 2 })}
           icon={<ViewListIcon />}
           path="rooms"
@@ -435,7 +434,11 @@ export const UserEdit = props => {
               >
                 <TextField source="name" sortable={false} />
               </ReferenceField>
-=======
+            </Datagrid>
+          </ReferenceField>
+        </FormTab>
+
+        <FormTab
           label={translate("resources.pushers.name", { smart_count: 2 })}
           icon={<NotificationsIcon />}
           path="pushers"
@@ -454,7 +457,6 @@ export const UserEdit = props => {
               <TextField source="lang" sortable={false} />
               <TextField source="profile_tag" sortable={false} />
               <TextField source="pushkey" sortable={false} />
->>>>>>> refs/remotes/origin/refs/heads/users_pushers
             </Datagrid>
           </ReferenceManyField>
         </FormTab>
