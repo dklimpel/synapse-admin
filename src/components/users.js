@@ -5,12 +5,9 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import DevicesIcon from "@material-ui/icons/Devices";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
-<<<<<<< HEAD
 import ViewListIcon from "@material-ui/icons/ViewList";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-=======
 import PermMediaIcon from "@material-ui/icons/PermMedia";
->>>>>>> refs/remotes/origin/refs/heads/users_media
 import {
   ArrayInput,
   ArrayField,
@@ -464,7 +461,11 @@ export const UserEdit = props => {
               <TextField source="lang" sortable={false} />
               <TextField source="profile_tag" sortable={false} />
               <TextField source="pushkey" sortable={false} />
-=======
+            </Datagrid>
+          </ReferenceManyField>
+        </FormTab>
+
+        <FormTab
           label={translate("resources.users_media.name", { smart_count: 2 })}
           icon={<PermMediaIcon />}
           path="media"
@@ -510,7 +511,6 @@ export const UserEdit = props => {
               <TextField source="quarantined_by" sortable={false} />
               <BooleanField source="safe_from_quarantine" sortable={false} />
               <DeleteWithConfirmButton />
->>>>>>> refs/remotes/origin/refs/heads/users_media
             </Datagrid>
           </ReferenceManyField>
         </FormTab>
