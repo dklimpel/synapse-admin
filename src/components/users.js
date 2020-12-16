@@ -5,8 +5,12 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import DevicesIcon from "@material-ui/icons/Devices";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
+<<<<<<< HEAD
 import ViewListIcon from "@material-ui/icons/ViewList";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+=======
+import PermMediaIcon from "@material-ui/icons/PermMedia";
+>>>>>>> refs/remotes/origin/refs/heads/users_media
 import {
   ArrayInput,
   ArrayField,
@@ -42,6 +46,8 @@ import {
   ExportButton,
   TopToolbar,
   sanitizeListRestProps,
+  NumberField,
+  DeleteWithConfirmButton,
 } from "react-admin";
 import { ServerNoticeButton, ServerNoticeBulkButton } from "./ServerNotices";
 import { DeviceRemoveButton } from "./devices";
@@ -407,6 +413,7 @@ export const UserEdit = props => {
         </FormTab>
 
         <FormTab
+<<<<<<< HEAD
           label={translate("resources.rooms.name", { smart_count: 2 })}
           icon={<ViewListIcon />}
           path="rooms"
@@ -457,6 +464,53 @@ export const UserEdit = props => {
               <TextField source="lang" sortable={false} />
               <TextField source="profile_tag" sortable={false} />
               <TextField source="pushkey" sortable={false} />
+=======
+          label={translate("resources.users_media.name", { smart_count: 2 })}
+          icon={<PermMediaIcon />}
+          path="media"
+        >
+          <ReferenceManyField
+            reference="users_media"
+            target="user_id"
+            addLabel={false}
+            pagination={<Pagination />}
+            perPage={25}
+          >
+            <Datagrid style={{ width: "100%" }}>
+              <DateField
+                source="created_ts"
+                showTime
+                options={{
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }}
+                sortable={false}
+              />
+              <DateField
+                source="last_access_ts"
+                showTime
+                options={{
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }}
+                sortable={false}
+              />
+              <TextField source="media_id" sortable={false} />
+              <NumberField source="media_length" sortable={false} />
+              <TextField source="media_type" sortable={false} />
+              <TextField source="upload_name" sortable={false} />
+              <TextField source="quarantined_by" sortable={false} />
+              <BooleanField source="safe_from_quarantine" sortable={false} />
+              <DeleteWithConfirmButton />
+>>>>>>> refs/remotes/origin/refs/heads/users_media
             </Datagrid>
           </ReferenceManyField>
         </FormTab>

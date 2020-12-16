@@ -61,6 +61,7 @@ const App = () => (
     <Resource name="room_members" />
     <Resource name="joined_rooms" />
     <Resource name="pushers" />
+    <Resource name="users_media" />
     <Resource name="servernotices" />
   </Admin>
 );
