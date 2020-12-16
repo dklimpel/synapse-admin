@@ -410,7 +410,6 @@ export const UserEdit = props => {
         </FormTab>
 
         <FormTab
-<<<<<<< HEAD
           label={translate("resources.rooms.name", { smart_count: 2 })}
           icon={<ViewListIcon />}
           path="rooms"
