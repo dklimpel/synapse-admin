@@ -122,6 +122,15 @@ const resourceMap = {
     }),
     data: "joined_rooms",
   },
+  pushers: {
+    map: p => ({
+      ...p,
+    }),
+    reference: id => ({
+      endpoint: `/_synapse/admin/v1/users/${id}/pushers`,
+    }),
+    data: "pushers",
+  },
   servernotices: {
     map: n => ({ id: n.event_id }),
     create: data => ({

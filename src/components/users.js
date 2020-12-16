@@ -6,6 +6,7 @@ import DevicesIcon from "@material-ui/icons/Devices";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import SettingsInputComponentIcon from "@material-ui/icons/SettingsInputComponent";
 import ViewListIcon from "@material-ui/icons/ViewList";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import {
   ArrayInput,
   ArrayField,
@@ -406,6 +407,7 @@ export const UserEdit = props => {
         </FormTab>
 
         <FormTab
+<<<<<<< HEAD
           label={translate("resources.rooms.name", { smart_count: 2 })}
           icon={<ViewListIcon />}
           path="rooms"
@@ -433,6 +435,26 @@ export const UserEdit = props => {
               >
                 <TextField source="name" sortable={false} />
               </ReferenceField>
+=======
+          label={translate("resources.pushers.name", { smart_count: 2 })}
+          icon={<NotificationsIcon />}
+          path="pushers"
+        >
+          <ReferenceManyField
+            reference="pushers"
+            target="user_id"
+            addLabel={false}
+          >
+            <Datagrid style={{ width: "100%" }}>
+              <TextField source="kind" sortable={false} />
+              <TextField source="app_display_name" sortable={false} />
+              <TextField source="app_id" sortable={false} />
+              <TextField source="data.url" sortable={false} />
+              <TextField source="device_display_name" sortable={false} />
+              <TextField source="lang" sortable={false} />
+              <TextField source="profile_tag" sortable={false} />
+              <TextField source="pushkey" sortable={false} />
+>>>>>>> refs/remotes/origin/refs/heads/users_pushers
             </Datagrid>
           </ReferenceManyField>
         </FormTab>
