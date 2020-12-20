@@ -42,7 +42,6 @@ import {
   TopToolbar,
   sanitizeListRestProps,
   NumberField,
-  DeleteWithConfirmButton,
 } from "react-admin";
 import { ServerNoticeButton, ServerNoticeBulkButton } from "./ServerNotices";
 import { DeviceRemoveButton } from "./devices";
@@ -416,8 +415,8 @@ export const UserEdit = props => {
             reference="users_media"
             target="user_id"
             addLabel={false}
-            pagination={<Pagination />}
-            perPage={25}
+            pagination={<UserPagination />}
+            perPage={50}
           >
             <Datagrid style={{ width: "100%" }}>
               <DateField
@@ -452,7 +451,7 @@ export const UserEdit = props => {
               <TextField source="upload_name" sortable={false} />
               <TextField source="quarantined_by" sortable={false} />
               <BooleanField source="safe_from_quarantine" sortable={false} />
-              <DeleteWithConfirmButton />
+              <DeleteButton undoable={false} redirect={false} />
             </Datagrid>
           </ReferenceManyField>
         </FormTab>
