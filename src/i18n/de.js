@@ -153,6 +153,8 @@ export default {
         join_rules: "Beitrittsregeln",
         guest_access: "Gastzugriff",
         history_visibility: "Historie-Sichtbarkeit",
+        topic: "Thema",
+        avatar: "Avatar",
       },
       enums: {
         join_rules: {

@@ -150,6 +150,8 @@ export default {
         join_rules: "Join rules",
         guest_access: "Guest access",
         history_visibility: "History visibility",
+        topic: "Topic",
+        avatar: "Avatar",
       },
       enums: {
         join_rules: {

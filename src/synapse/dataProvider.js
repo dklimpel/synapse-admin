@@ -185,6 +185,20 @@ const resourceMap = {
       return json.total;
     },
   },
+  room_directory: {
+    path: "/_matrix/client/r0/publicRooms",
+    map: rd => ({
+      ...rd,
+      id: rd.room_id,
+      public: !!rd.public,
+      guest_access: !!rd.guest_access,
+      avatar_src: mxcUrlToHttp(rd.avatar_url),
+    }),
+    data: "chunk",
+    total: json => {
+      return json.total_room_count_estimate;
+    },
+  },
 };
 
 function filterNullValues(key, value) {
