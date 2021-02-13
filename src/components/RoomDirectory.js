@@ -1,8 +1,8 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
+import { Chip } from "@material-ui/core";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Chip } from "@material-ui/core";
 import {
   BooleanField,
   Datagrid,
@@ -15,7 +15,7 @@ import {
 } from "react-admin";
 
 const RoomDirectoryPagination = props => (
-  <Pagination {...props} rowsPerPageOptions={[10, 25, 50, 100, 500, 1000]} />
+  <Pagination {...props} rowsPerPageOptions={[100, 500, 1000, 2000]} />
 );
 
 const useStyles = makeStyles({
