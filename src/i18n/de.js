@@ -275,6 +275,7 @@ export default {
         media_length: "Größe der Dateien",
       },
     },
+    room_directory: { name: "Raumverzeichnis" },
   },
   ra: {
     ...germanMessages.ra,

@@ -272,5 +272,6 @@ export default {
         media_length: "Media length",
       },
     },
+    room_directory: { name: "Room directory" },
   },
 };
