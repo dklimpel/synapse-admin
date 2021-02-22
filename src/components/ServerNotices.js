@@ -10,7 +10,7 @@ import {
   useMutation,
   useNotify,
   useTranslate,
-  useUnselectAll,
+  useUnselectAll
 } from "react-admin";
 import MessageIcon from "@material-ui/icons/Message";
 import IconCancel from "@material-ui/icons/Cancel";
@@ -22,7 +22,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 const ServerNoticeDialog = ({ open, loading, onClose, onSend }) => {
   const translate = useTranslate();
 
-  const ServerNoticeToolbar = props => (
+  const ServerNoticeToolbar = (props) => (
     <Toolbar {...props}>
       <SaveButton label="resources.servernotices.action.send" />
       <Button label="ra.action.cancel" onClick={onClose}>
@@ -69,7 +69,7 @@ export const ServerNoticeButton = ({ record }) => {
   const handleDialogOpen = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
 
-  const handleSend = values => {
+  const handleSend = (values) => {
     create(
       { payload: { data: { id: record.id, ...values } } },
       {
@@ -78,7 +78,7 @@ export const ServerNoticeButton = ({ record }) => {
           handleDialogClose();
         },
         onFailure: () =>
-          notify("resources.servernotices.action.send_failure", "error"),
+          notify("resources.servernotices.action.send_failure", "error")
       }
     );
   };
@@ -110,12 +110,12 @@ export const ServerNoticeBulkButton = ({ selectedIds }) => {
   const handleDialogOpen = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
 
-  const handleSend = values => {
+  const handleSend = (values) => {
     createMany(
       {
         type: "createMany",
         resource: "servernotices",
-        payload: { ids: selectedIds, data: values },
+        payload: { ids: selectedIds, data: values }
       },
       {
         onSuccess: ({ data }) => {
@@ -123,8 +123,8 @@ export const ServerNoticeBulkButton = ({ selectedIds }) => {
           unselectAll("users");
           handleDialogClose();
         },
-        onFailure: error =>
-          notify("resources.servernotices.action.send_failure", "error"),
+        onFailure: (error) =>
+          notify("resources.servernotices.action.send_failure", "error")
       }
     );
   };
