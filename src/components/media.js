@@ -10,7 +10,6 @@ import {
   SaveButton,
   SimpleForm,
   Toolbar,
-  required,
   useDelete,
   useNotify,
   useTranslate,
@@ -41,11 +40,17 @@ const useStyles = makeStyles(
 const DeleteMediaDialog = ({ open, loading, onClose, onSend }) => {
   const translate = useTranslate();
 
+  const dateParser = v => {
+    const d = new Date(v);
+    if (isNaN(d)) return 0;
+    return d.getTime();
+  };
+
   const DeleteMediaToolbar = props => {
     return (
       <Toolbar {...props}>
         <SaveButton
-          label="resources.media.action.send"
+          label="resources.delete_media.action.send"
           icon={<DeleteSweepIcon />}
         />
         <Button label="ra.action.cancel" onClick={onClose}>
@@ -57,10 +62,12 @@ const DeleteMediaDialog = ({ open, loading, onClose, onSend }) => {
 
   return (
     <Dialog open={open} onClose={onClose} loading={loading}>
-      <DialogTitle>{translate("resources.media.action.send")}</DialogTitle>
+      <DialogTitle>
+        {translate("resources.delete_media.action.send")}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          {translate("resources.media.helper.send")}
+          {translate("resources.delete_media.helper.send")}
         </DialogContentText>
         <SimpleForm
           toolbar={<DeleteMediaToolbar />}
@@ -71,13 +78,14 @@ const DeleteMediaDialog = ({ open, loading, onClose, onSend }) => {
           <DateTimeInput
             fullWidth
             source="before_ts"
-            label="resources.media.fields.before_ts"
+            label="resources.delete_media.fields.before_ts"
             defaultValue={0}
+            parse={dateParser}
           />
           <NumberInput
             fullWidth
             source="size_gt"
-            label="resources.media.fields.size_gt"
+            label="resources.delete_media.fields.size_gt"
             defaultValue={0}
             min={0}
             step={1024}
@@ -85,7 +93,7 @@ const DeleteMediaDialog = ({ open, loading, onClose, onSend }) => {
           <BooleanInput
             fullWidth
             source="keep_profiles"
-            label="resources.media.fields.keep_profiles"
+            label="resources.delete_media.fields.keep_profiles"
             defaultValue={true}
           />
         </SimpleForm>
@@ -98,21 +106,21 @@ export const DeleteMediaButton = props => {
   const classes = useStyles(props);
   const [open, setOpen] = useState(false);
   const notify = useNotify();
-  const [deleteOne, { loading }] = useDelete("servernotices");
+  const [deleteOne, { loading }] = useDelete("delete_media");
 
   const handleDialogOpen = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
 
   const handleSend = values => {
-    console.log(values);
     deleteOne(
-      { payload: { data: { ...values } } },
+      { payload: { ...values } },
       {
         onSuccess: () => {
-          notify("resources.media.action.send_success");
+          notify("resources.delete_media.action.send_success");
           handleDialogClose();
         },
-        onFailure: () => notify("resources.media.action.send_failure", "error"),
+        onFailure: () =>
+          notify("resources.delete_media.action.send_failure", "error"),
       }
     );
   };
@@ -120,7 +128,7 @@ export const DeleteMediaButton = props => {
   return (
     <Fragment>
       <Button
-        label="resources.media.action.send"
+        label="resources.delete_media.action.send"
         onClick={handleDialogOpen}
         disabled={loading}
         className={classnames("ra-delete-button", classes.deleteButton)}

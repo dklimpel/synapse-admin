@@ -236,21 +236,21 @@ export default {
         last_access_ts: "Letzter Zugriff",
       },
     },
-    media: {
-      name: "Media",
+    delete_media: {
+      name: "Medien",
       fields: {
-        before_ts: "Älter als",
-        size_gt: "Größer als (in Kilobytes)",
+        before_ts: "Letzter Zugriff vor",
+        size_gt: "Größer als (in Bytes)",
         keep_profiles: "Behalte Profilbilder",
       },
       action: {
         send: "Medien löschen",
-        send_success: "Nachricht erfolgreich versendet.",
+        send_success: "Anfrage erfolgreich versendet.",
         send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
       },
       helper: {
         send:
-          "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded from remote homeservers. This API will not affect media that has been uploaded to external media repositories",
+          "Diese API löscht die lokalen Medien von der Festplatte des eigenen Servers. Dies umfasst alle lokalen Miniaturbilder und Kopien von Medien. Diese API wirkt sich nicht auf Medien aus, die sich in externen Medien-Repositories befinden.",
       },
     },
     pushers: {
