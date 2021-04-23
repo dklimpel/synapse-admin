@@ -315,6 +315,15 @@ export const UserEdit = props => {
             }}
           />
           <TextField source="consent_version" />
+          <ReferenceField
+            label="resources.rooms.fields.name"
+            source="id"
+            reference="user_ratelimit"
+            sortable={false}
+            link=""
+          >
+            <TextField source="name" />
+          </ReferenceField>
         </FormTab>
 
         <FormTab

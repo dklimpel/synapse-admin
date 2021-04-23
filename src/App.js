@@ -64,6 +64,7 @@ const App = () => (
     <Resource name="joined_rooms" />
     <Resource name="pushers" />
     <Resource name="servernotices" />
+    <Resource name="user_ratelimit" />
   </Admin>
 );
 

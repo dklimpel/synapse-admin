@@ -160,6 +160,19 @@ const resourceMap = {
       )}/${params.id}`,
     }),
   },
+  user_ratelimit: {
+    map: rl => ({
+      ...rl,
+      id: rl.media_id,
+    }),
+    reference: id => ({
+      endpoint: `/_synapse/admin/v1/users/${id}/override_ratelimit`,
+    }),
+    data: "media",
+    delete: params => ({
+      endpoint: `/_synapse/admin/v1/users/${params.id}/override_ratelimit`,
+    }),
+  },
   delete_media: {
     delete: params => ({
       endpoint: `/_synapse/admin/v1/media/${localStorage.getItem(
