@@ -316,6 +316,12 @@ export const UserEdit = props => {
             }}
           />
           <TextField source="consent_version" />
+          <ArrayField source="user_ratelimit" fieldKey="id">
+            <Datagrid>
+              <DateField source="date" />
+              <TextField source="url" />
+            </Datagrid>
+          </ArrayField>
           <ReferenceField
             label="Rate Limit"
             source="id"
