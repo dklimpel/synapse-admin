@@ -164,6 +164,7 @@ export const UserList = props => {
       {...props}
       filters={<UserFilter />}
       filterDefaultValues={{ guests: true, deactivated: false }}
+      sort={{ field: "name", order: "ASC" }}
       actions={<UserListActions maxResults={10000} />}
       bulkActionButtons={<UserBulkActionButtons />}
       pagination={<UserPagination />}
@@ -174,7 +175,7 @@ export const UserList = props => {
           sortable={false}
           className={classes.small}
         />
-        <TextField source="id" sortable={false} />
+        <TextField source="id" sortBy="name" />
         <TextField source="displayname" sortable={false} />
         <BooleanField source="is_guest" sortable={false} />
         <BooleanField source="admin" sortable={false} />
@@ -316,13 +317,22 @@ export const UserEdit = props => {
           />
           <TextField source="consent_version" />
           <ReferenceField
-            label="resources.rooms.fields.name"
+            label="Rate Limit"
             source="id"
             reference="user_ratelimit"
             sortable={false}
             link=""
           >
-            <TextField source="name" />
+            <TextField source="messages_per_second" />
+          </ReferenceField>
+          <ReferenceField
+            label="messages_per_second"
+            source="id"
+            reference="user_ratelimit"
+            sortable={false}
+            link=""
+          >
+            <TextField source="burst_count" />
           </ReferenceField>
         </FormTab>
 

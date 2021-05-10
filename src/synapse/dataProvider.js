@@ -278,13 +278,26 @@ const dataProvider = {
 
     const res = resourceMap[resource];
 
-    const endpoint_url = homeserver + res.path;
-    return Promise.all(
-      params.ids.map(id => jsonClient(`${endpoint_url}/${id}`))
-    ).then(responses => ({
-      data: responses.map(({ json }) => res.map(json)),
-      total: responses.length,
-    }));
+    if ("reference" in res) {
+      return Promise.all(
+        params.ids.map(id => {
+          const ref = res["reference"](id);
+          const endpoint_url = homeserver + ref.endpoint;
+          return jsonClient(endpoint_url);
+        })
+      ).then(responses => ({
+        data: responses.map(({ json }) => res.map(json)),
+        total: responses.length,
+      }));
+    } else {
+      const endpoint_url = homeserver + res.path;
+      return Promise.all(
+        params.ids.map(id => jsonClient(`${endpoint_url}/${id}`))
+      ).then(responses => ({
+        data: responses.map(({ json }) => res.map(json)),
+        total: responses.length,
+      }));
+    }
   },
 
   getManyReference: (resource, params) => {
