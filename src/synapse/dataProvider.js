@@ -163,7 +163,8 @@ const resourceMap = {
   user_ratelimit: {
     map: rl => ({
       ...rl,
-      id: rl.media_id,
+      id: "dummy",
+      messages_per_second: rl.messages_per_second,
     }),
     reference: id => ({
       endpoint: `/_synapse/admin/v1/users/${id}/override_ratelimit`,
@@ -265,10 +266,18 @@ const dataProvider = {
 
     const res = resourceMap[resource];
 
-    const endpoint_url = homeserver + res.path;
-    return jsonClient(`${endpoint_url}/${params.id}`).then(({ json }) => ({
-      data: res.map(json),
-    }));
+    if ("reference" in res) {
+      const ref = res["reference"](params.id);
+      const endpoint_url = homeserver + ref.endpoint;
+      return jsonClient(endpoint_url).then(({ json }) => ({
+        data: res.map(json),
+      }));
+    } else {
+      const endpoint_url = homeserver + res.path;
+      return jsonClient(`${endpoint_url}/${params.id}`).then(({ json }) => ({
+        data: res.map(json),
+      }));
+    }
   },
 
   getMany: (resource, params) => {

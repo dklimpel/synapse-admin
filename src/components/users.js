@@ -15,10 +15,13 @@ import {
   Datagrid,
   DateField,
   Create,
+  CreateButton,
   Edit,
+  EditButton,
   List,
   Filter,
   Toolbar,
+  ShowButton,
   SimpleForm,
   SimpleFormIterator,
   TabbedForm,
@@ -39,7 +42,6 @@ import {
   useRedirect,
   useTranslate,
   Pagination,
-  CreateButton,
   ExportButton,
   TopToolbar,
   sanitizeListRestProps,
@@ -280,6 +282,17 @@ const UserTitle = ({ record }) => {
     </span>
   );
 };
+
+const RateLimitEditButton = ({ record }) => {
+  return (
+    <div>
+      <EditButton basePath="/user_ratelimit" label="Edit" record={record} />
+      <ShowButton basePath="/user_ratelimit" label="Show" record={record} />
+      <CreateButton basePath="/user_ratelimit" label="Create" record={record} />
+    </div>
+  );
+};
+
 export const UserEdit = props => {
   const classes = useStyles();
   const translate = useTranslate();
@@ -316,14 +329,9 @@ export const UserEdit = props => {
             }}
           />
           <TextField source="consent_version" />
-          <ArrayField source="user_ratelimit" fieldKey="id">
-            <Datagrid>
-              <DateField source="date" />
-              <TextField source="url" />
-            </Datagrid>
-          </ArrayField>
+          <RateLimitEditButton />
           <ReferenceField
-            label="Rate Limit"
+            label="messages_per_second"
             source="id"
             reference="user_ratelimit"
             sortable={false}
@@ -332,7 +340,7 @@ export const UserEdit = props => {
             <TextField source="messages_per_second" />
           </ReferenceField>
           <ReferenceField
-            label="messages_per_second"
+            label="burst_count"
             source="id"
             reference="user_ratelimit"
             sortable={false}

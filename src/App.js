@@ -5,6 +5,11 @@ import authProvider from "./synapse/authProvider";
 import dataProvider from "./synapse/dataProvider";
 import { UserList, UserCreate, UserEdit } from "./components/users";
 import { RoomList, RoomShow } from "./components/rooms";
+import {
+  RateLimitEdit,
+  RateLimitCreate,
+  RateLimitShow,
+} from "./components/ratelimit";
 import { ReportList, ReportShow } from "./components/EventReports";
 import LoginPage from "./components/LoginPage";
 import UserIcon from "@material-ui/icons/Group";
@@ -64,7 +69,12 @@ const App = () => (
     <Resource name="joined_rooms" />
     <Resource name="pushers" />
     <Resource name="servernotices" />
-    <Resource name="user_ratelimit" />
+    <Resource
+      name="user_ratelimit"
+      edit={RateLimitEdit}
+      create={RateLimitCreate}
+      show={RateLimitShow}
+    />
   </Admin>
 );
 
