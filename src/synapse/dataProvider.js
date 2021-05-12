@@ -163,13 +163,12 @@ const resourceMap = {
   user_ratelimit: {
     map: rl => ({
       ...rl,
-      id: "dummy",
-      messages_per_second: rl.messages_per_second,
+      id: rl.messages_per_second,
     }),
     reference: id => ({
       endpoint: `/_synapse/admin/v1/users/${id}/override_ratelimit`,
     }),
-    data: "media",
+    data: null,
     delete: params => ({
       endpoint: `/_synapse/admin/v1/users/${params.id}/override_ratelimit`,
     }),

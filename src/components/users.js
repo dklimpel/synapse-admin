@@ -330,12 +330,29 @@ export const UserEdit = props => {
           />
           <TextField source="consent_version" />
           <RateLimitEditButton />
+          <ReferenceManyField
+            reference="user_ratelimit"
+            target="user_id"
+            addLabel={false}
+          >
+            <Datagrid>
+              <TextField
+                source="messages_per_second"
+                sortable={false}
+                label="messages_per_second"
+              />
+              <TextField
+                source="burst_count"
+                sortable={false}
+                label="burst_count"
+              />
+            </Datagrid>
+          </ReferenceManyField>
           <ReferenceField
             label="messages_per_second"
             source="id"
             reference="user_ratelimit"
-            sortable={false}
-            link=""
+            link={false}
           >
             <TextField source="messages_per_second" />
           </ReferenceField>
@@ -343,8 +360,7 @@ export const UserEdit = props => {
             label="burst_count"
             source="id"
             reference="user_ratelimit"
-            sortable={false}
-            link=""
+            link={false}
           >
             <TextField source="burst_count" />
           </ReferenceField>
