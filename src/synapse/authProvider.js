@@ -3,8 +3,9 @@ import { fetchUtils } from "react-admin";
 const authProvider = {
   // called when the user attempts to log in
   login: ({ base_url, username, password }) => {
-    const override_server = process.env.REACT_APP_SERVER;
-    base_url = override_server ? override_server : base_url;
+    base_url = process.env.REACT_APP_SERVER
+      ? process.env.REACT_APP_SERVER
+      : base_url;
 
     console.log("login ");
     const options = {

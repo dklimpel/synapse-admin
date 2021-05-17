@@ -101,6 +101,7 @@ const LoginPage = ({ theme }) => {
   );
 
   const validate = values => {
+    console.log('base_url: "' + values.base_url + '"');
     const errors = {};
     if (!values.username) {
       errors.username = translate("ra.validation.required");
@@ -118,6 +119,12 @@ const LoginPage = ({ theme }) => {
           /^(http|https):\/\/[a-zA-Z0-9\-.]+(:\d{1,5})?[^?&\s]*$/
         )
       ) {
+        console.log(
+          values.base_url.match(
+            /^(http|https):\/\/[a-zA-Z0-9\-.]+(:\d{1,5})?[^?&\s]*$/
+          )
+        );
+        console.log(translate("synapseadmin.auth.url_error"));
         errors.base_url = translate("synapseadmin.auth.url_error");
       }
     }
@@ -204,6 +211,7 @@ const LoginPage = ({ theme }) => {
             label={translate("ra.auth.username")}
             disabled={loading}
             onBlur={handleUsernameChange}
+            resettable
             fullWidth
           />
         </div>
@@ -214,6 +222,7 @@ const LoginPage = ({ theme }) => {
             label={translate("ra.auth.password")}
             type="password"
             disabled={loading}
+            resettable
             fullWidth
           />
         </div>
@@ -223,6 +232,7 @@ const LoginPage = ({ theme }) => {
             component={renderInput}
             label={translate("synapseadmin.auth.base_url")}
             disabled={override_server ? true : loading}
+            resettable
             fullWidth
           />
         </div>
