@@ -84,8 +84,6 @@ const LoginPage = ({ theme }) => {
   const base_url = localStorage.getItem("base_url");
   const override_server = process.env.REACT_APP_SERVER;
 
-  console.log("NeueInfo " + override_server);
-
   const renderInput = ({
     meta: { touched, error } = {},
     input: { ...inputProps },
@@ -101,7 +99,6 @@ const LoginPage = ({ theme }) => {
   );
 
   const validate = values => {
-    console.log('base_url: "' + values.base_url + '"');
     const errors = {};
     if (!values.username) {
       errors.username = translate("ra.validation.required");
@@ -119,12 +116,6 @@ const LoginPage = ({ theme }) => {
           /^(http|https):\/\/[a-zA-Z0-9\-.]+(:\d{1,5})?[^?&\s]*$/
         )
       ) {
-        console.log(
-          values.base_url.match(
-            /^(http|https):\/\/[a-zA-Z0-9\-.]+(:\d{1,5})?[^?&\s]*$/
-          )
-        );
-        console.log(translate("synapseadmin.auth.url_error"));
         errors.base_url = translate("synapseadmin.auth.url_error");
       }
     }
