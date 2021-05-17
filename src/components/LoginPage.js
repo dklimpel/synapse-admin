@@ -84,7 +84,7 @@ const LoginPage = ({ theme }) => {
   const base_url = localStorage.getItem("base_url");
   const override_server = process.env.REACT_APP_SERVER;
 
-  console.log("NeueInfo " + process.env.REACT_APP_SERVER);
+  console.log("NeueInfo " + override_server);
 
   const renderInput = ({
     meta: { touched, error } = {},
@@ -152,7 +152,7 @@ const LoginPage = ({ theme }) => {
     const [serverVersion, setServerVersion] = useState("");
 
     const handleUsernameChange = _ => {
-      if (formData.base_url) return;
+      if (formData.base_url || override_server) return;
       // check if username is a full qualified userId then set base_url accordially
       const home_server = extractHomeServer(formData.username);
       const wellKnownUrl = `https://${home_server}/.well-known/matrix/client`;
@@ -172,12 +172,17 @@ const LoginPage = ({ theme }) => {
 
     useEffect(
       _ => {
+        /*
         if (
           !formData.base_url ||
-          !formData.base_url.match(/^(http|https):\/\/[a-zA-Z0-9\-.]+$/)
+          !formData.base_url.match(/^(http|https):\/\/[a-zA-Z0-9\-.]+$/) ||
+          // überarbeitung notig
+          !override_server
         )
           return;
-        const versionUrl = `${formData.base_url}/_synapse/admin/v1/server_version`;
+          */
+        // const versionUrl = `${formData.base_url}/_synapse/admin/v1/server_version`;
+        const versionUrl = `${override_server}/_synapse/admin/v1/server_version`;
         fetchUtils
           .fetchJson(versionUrl, { method: "GET" })
           .then(({ json }) => {
@@ -218,13 +223,23 @@ const LoginPage = ({ theme }) => {
           />
         </div>
         <div className={classes.input}>
-          <TextInput
-            name="base_url"
-            component={renderInput}
-            label={translate("synapseadmin.auth.base_url")}
-            disabled={loading}
-            fullWidth
-          />
+          {override_server ? (
+            <TextField
+              name="base_url"
+              label={override_server}
+              disabled={true}
+              helperText={translate("synapseadmin.auth.url_by_admin ")}
+              fullWidth
+            />
+          ) : (
+            <TextInput
+              name="base_url"
+              component={renderInput}
+              label={translate("synapseadmin.auth.base_url")}
+              disabled={loading}
+              fullWidth
+            />
+          )}
         </div>
         <div className={classes.serverVersion}>{serverVersion}</div>
       </div>
