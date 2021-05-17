@@ -34,9 +34,9 @@ Steps for 1):
 - start web server: `yarn start`
 
 You can fix the homeserver, so that the user can no longer define it himself.
-Either you define it at startup `REACT_APP_SERVER=https://yourmatrixserver.example.com yarn start`
+Either you define it at startup (e.g. `REACT_APP_SERVER=https://yourmatrixserver.example.com yarn start`)
 or by editing it in the [.env](.env) file. See also the
-[documentation](https://create-react-app.dev/docs/adding-custom-environment-variables/)
+[documentation](https://create-react-app.dev/docs/adding-custom-environment-variables/).
 
 Steps for 2):
 
