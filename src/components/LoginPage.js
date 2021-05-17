@@ -172,17 +172,12 @@ const LoginPage = ({ theme }) => {
 
     useEffect(
       _ => {
-        /*
         if (
           !formData.base_url ||
-          !formData.base_url.match(/^(http|https):\/\/[a-zA-Z0-9\-.]+$/) ||
-          // überarbeitung notig
-          !override_server
+          !formData.base_url.match(/^(http|https):\/\/[a-zA-Z0-9\-.]+$/)
         )
           return;
-          */
-        // const versionUrl = `${formData.base_url}/_synapse/admin/v1/server_version`;
-        const versionUrl = `${override_server}/_synapse/admin/v1/server_version`;
+        const versionUrl = `${formData.base_url}/_synapse/admin/v1/server_version`;
         fetchUtils
           .fetchJson(versionUrl, { method: "GET" })
           .then(({ json }) => {
@@ -223,23 +218,13 @@ const LoginPage = ({ theme }) => {
           />
         </div>
         <div className={classes.input}>
-          {override_server ? (
-            <TextField
-              name="base_url"
-              label={override_server}
-              disabled={true}
-              helperText={translate("synapseadmin.auth.url_by_admin")}
-              fullWidth
-            />
-          ) : (
-            <TextInput
-              name="base_url"
-              component={renderInput}
-              label={translate("synapseadmin.auth.base_url")}
-              disabled={loading}
-              fullWidth
-            />
-          )}
+          <TextInput
+            name="base_url"
+            component={renderInput}
+            label={translate("synapseadmin.auth.base_url")}
+            disabled={override_server ? true : loading}
+            fullWidth
+          />
         </div>
         <div className={classes.serverVersion}>{serverVersion}</div>
       </div>
@@ -248,7 +233,7 @@ const LoginPage = ({ theme }) => {
 
   return (
     <Form
-      initialValues={{ base_url: base_url }}
+      initialValues={{ base_url: override_server ? override_server : base_url }}
       onSubmit={handleSubmit}
       validate={validate}
       render={({ handleSubmit }) => (
