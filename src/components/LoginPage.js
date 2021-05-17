@@ -82,8 +82,9 @@ const LoginPage = ({ theme }) => {
   const setLocale = useSetLocale();
   const translate = useTranslate();
   const base_url = localStorage.getItem("base_url");
+  const override_server = process.env.REACT_APP_SERVER;
 
-  console.log("NeueInfo " + process.env.REACT_APP_NEW_VAR);
+  console.log("NeueInfo " + process.env.REACT_APP_SERVER);
 
   const renderInput = ({
     meta: { touched, error } = {},
