@@ -83,6 +83,8 @@ const LoginPage = ({ theme }) => {
   const translate = useTranslate();
   const base_url = localStorage.getItem("base_url");
 
+  console.log("NeueInfo " + process.env.REACT_APP_NEW_VAR);
+
   const renderInput = ({
     meta: { touched, error } = {},
     input: { ...inputProps },
