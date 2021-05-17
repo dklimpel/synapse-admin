@@ -228,7 +228,7 @@ const LoginPage = ({ theme }) => {
               name="base_url"
               label={override_server}
               disabled={true}
-              helperText={translate("synapseadmin.auth.url_by_admin ")}
+              helperText={translate("synapseadmin.auth.url_by_admin")}
               fullWidth
             />
           ) : (
