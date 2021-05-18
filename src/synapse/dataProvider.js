@@ -55,7 +55,7 @@ const resourceMap = {
     path: "/_synapse/admin/v1/rooms",
     map: r => ({
       ...r,
-      id: r.room_id,
+      id: encodeURI(r.room_id),
       alias: r.canonical_alias,
       members: r.joined_members,
       is_encrypted: !!r.encryption,
