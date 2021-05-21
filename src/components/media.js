@@ -5,21 +5,26 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   BooleanInput,
   Button,
+  Confirm,
   DateTimeInput,
   NumberInput,
   SaveButton,
   SimpleForm,
   Toolbar,
+  useCreate,
   useDelete,
   useNotify,
+  useRefresh,
   useTranslate,
 } from "react-admin";
-import IconCancel from "@material-ui/icons/Cancel";
+import BlockIcon from "@material-ui/icons/Block";
+import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
+import IconCancel from "@material-ui/icons/Cancel";
+import SecurityIcon from "@material-ui/icons/Security";
 
 const useStyles = makeStyles(
   theme => ({
@@ -139,6 +144,115 @@ export const DeleteMediaButton = props => {
         open={open}
         onClose={handleDialogClose}
         onSend={handleSend}
+      />
+    </Fragment>
+  );
+};
+
+export const QuarantineMediaButton = props => {
+  const { record } = props;
+  const classes = useStyles(props);
+  const [open, setOpen] = useState(false);
+  const refresh = useRefresh();
+  const notify = useNotify();
+  const [create, { loading }] = useCreate("quarantine_media");
+
+  if (!record || record.safe_from_quarantine || record.quarantined_by)
+    return null;
+
+  const handleClick = () => setOpen(true);
+  const handleDialogClose = () => setOpen(false);
+
+  const handleSend = () => {
+    create(
+      { payload: { data: record } },
+      {
+        onSuccess: () => {
+          notify("resources.quarantine_media.action.create.send_success");
+          refresh();
+        },
+        onFailure: () =>
+          notify(
+            "resources.quarantine_media.action.create.send_failure",
+            "error"
+          ),
+      }
+    );
+    handleDialogClose();
+  };
+
+  return (
+    <Fragment>
+      <Button
+        label="resources.quarantine_media.action.create.name"
+        onClick={handleClick}
+        className={classnames("ra-delete-button", classes.deleteButton)}
+      >
+        <BlockIcon />
+      </Button>
+      <Confirm
+        isOpen={open}
+        loading={loading}
+        onConfirm={handleSend}
+        onClose={handleDialogClose}
+        title="resources.quarantine_media.action.create.title"
+        content="resources.quarantine_media.action.create.content"
+        translateOptions={{
+          id: record.id,
+          name: record.upload_name || record.id,
+        }}
+      />
+    </Fragment>
+  );
+};
+
+export const ProtectMediaButton = props => {
+  const { record } = props;
+  const [open, setOpen] = useState(false);
+  const refresh = useRefresh();
+  const notify = useNotify();
+  const [create, { loading }] = useCreate("protect_media");
+
+  if (!record || record.safe_from_quarantine || record.quarantined_by)
+    return null;
+
+  const handleClick = () => setOpen(true);
+  const handleDialogClose = () => setOpen(false);
+
+  const handleSend = () => {
+    create(
+      { payload: { data: record } },
+      {
+        onSuccess: () => {
+          notify("resources.protect_media.action.create.send_success");
+          refresh();
+        },
+        onFailure: () =>
+          notify("resources.protect_media.action.create.send_failure", "error"),
+      }
+    );
+    handleDialogClose();
+  };
+
+  return (
+    <Fragment>
+      <Button
+        label="resources.protect_media.action.create.name"
+        onClick={handleClick}
+      >
+        <SecurityIcon />
+      </Button>
+      <Confirm
+        isOpen={open}
+        loading={loading}
+        onConfirm={handleSend}
+        onClose={handleDialogClose}
+        title="resources.protect_media.action.create.title"
+        content="resources.protect_media.action.create.content"
+        translateOptions={{
+          id: record.id,
+          name: record.upload_name || record.id,
+        }}
       />
     </Fragment>
   );

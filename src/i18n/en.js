@@ -258,6 +258,29 @@ const en = {
           "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded. This API will not affect media that has been uploaded to external media repositories.",
       },
     },
+    quarantine_media: {
+      action: {
+        create: {
+          name: "Quarantine",
+          title: "Add %{id} to quarantine",
+          content: 'Are you sure you want quarantining "%{name}"?',
+          send_success: "Successfully added to quarantine.",
+          send_failure: "An error has occurred.",
+        },
+      },
+    },
+    protect_media: {
+      action: {
+        create: {
+          name: "Protect",
+          title: "Protecting %{id} from being quarantined",
+          content:
+            'Are you sure you want to protect "%{name}" from quarantine?',
+          send_success: "Successfully protected from quarantine.",
+          send_failure: "An error has occurred.",
+        },
+      },
+    },
     pushers: {
       name: "Pusher |||| Pushers",
       fields: {

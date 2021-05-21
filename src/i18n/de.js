@@ -262,6 +262,29 @@ const de = {
           "Diese API löscht die lokalen Medien von der Festplatte des eigenen Servers. Dies umfasst alle lokalen Miniaturbilder und Kopien von Medien. Diese API wirkt sich nicht auf Medien aus, die sich in externen Medien-Repositories befinden.",
       },
     },
+    quarantine_media: {
+      action: {
+        create: {
+          name: "Quarantäne",
+          title: "%{id} zur Quarantäne hinzufügen",
+          content: 'Möchten Sie "%{name}" wirklich zur Quarantäne hinzufügen?',
+          send_success: "Erfolgreich zur Quarantäne hinzugefügt.",
+          send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
+        },
+      },
+    },
+    protect_media: {
+      action: {
+        create: {
+          name: "Schützen",
+          title: "%{id} vor der Quarantäne schützen",
+          content:
+            'Möchten Sie "%{name}" wirklich vor der Quarantäne schützen?',
+          send_success: "Erfolgreich vor der Quarantäne geschützt.",
+          send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
+        },
+      },
+    },
     pushers: {
       name: "Pusher |||| Pushers",
       fields: {
