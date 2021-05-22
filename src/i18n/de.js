@@ -271,6 +271,7 @@ const de = {
           send_success: "Erfolgreich zur Quarantäne hinzugefügt.",
           send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
         },
+        delete: { name: "Unqarantäne" },
       },
     },
     protect_media: {
@@ -283,6 +284,7 @@ const de = {
           send_success: "Erfolgreich vor der Quarantäne geschützt.",
           send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
         },
+        delete: { name: "Unprotect" },
       },
     },
     pushers: {

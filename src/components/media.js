@@ -24,6 +24,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconCancel from "@material-ui/icons/Cancel";
+import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import SecurityIcon from "@material-ui/icons/Security";
 
 const useStyles = makeStyles(
@@ -156,14 +158,21 @@ export const QuarantineMediaButton = props => {
   const refresh = useRefresh();
   const notify = useNotify();
   const [create, { loading }] = useCreate("quarantine_media");
+  const [deleteOne] = useDelete("quarantine_media");
 
+  {
+    /*
   if (!record || record.safe_from_quarantine || record.quarantined_by)
     return null;
+  */
+  }
+
+  if (!record) return null;
 
   const handleClick = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
 
-  const handleSend = () => {
+  const handleQuarantaine = () => {
     create(
       { payload: { data: record } },
       {
@@ -181,15 +190,46 @@ export const QuarantineMediaButton = props => {
     handleDialogClose();
   };
 
+  const handleRemoveQuarantaine = () => {
+    deleteOne(
+      { payload: { record } },
+      {
+        onSuccess: () => {
+          notify("resources.quarantine_media.action.delete.send_success");
+          refresh();
+        },
+        onFailure: () =>
+          notify(
+            "resources.quarantine_media.action.delete.send_failure",
+            "error"
+          ),
+      }
+    );
+    handleDialogClose();
+  };
+
   return (
     <Fragment>
-      <Button
-        label="resources.quarantine_media.action.create.name"
-        onClick={handleClick}
-        className={classnames("ra-delete-button", classes.deleteButton)}
-      >
-        <BlockIcon />
-      </Button>
+      {!record.safe_from_quarantine && !record.quarantined_by && (
+        <Button
+          label="resources.quarantine_media.action.create.name"
+          onClick={handleQuarantaine}
+          disabled={loading}
+          className={classnames("ra-delete-button", classes.deleteButton)}
+        >
+          <BlockIcon />
+        </Button>
+      )}
+      {record.quarantined_by && (
+        <Button
+          label="resources.quarantine_media.action.delete.name"
+          onClick={handleRemoveQuarantaine}
+          disabled={loading}
+        >
+          <BlockIcon />
+        </Button>
+      )}
+      {/*
       <Confirm
         isOpen={open}
         loading={loading}
@@ -202,6 +242,7 @@ export const QuarantineMediaButton = props => {
           name: record.upload_name || record.id,
         }}
       />
+      */}
     </Fragment>
   );
 };
@@ -212,14 +253,20 @@ export const ProtectMediaButton = props => {
   const refresh = useRefresh();
   const notify = useNotify();
   const [create, { loading }] = useCreate("protect_media");
+  const [deleteOne] = useDelete("quarantine_media");
 
+  {
+    /* 
   if (!record || record.safe_from_quarantine || record.quarantined_by)
     return null;
+  */
+  }
+  if (!record) return null;
 
   const handleClick = () => setOpen(true);
   const handleDialogClose = () => setOpen(false);
 
-  const handleSend = () => {
+  const handleProtect = () => {
     create(
       { payload: { data: record } },
       {
@@ -234,14 +281,42 @@ export const ProtectMediaButton = props => {
     handleDialogClose();
   };
 
+  const handleUnprotect = () => {
+    deleteOne(
+      { payload: { record } },
+      {
+        onSuccess: () => {
+          notify("resources.protect_media.action.delete.send_success");
+          refresh();
+        },
+        onFailure: () =>
+          notify("resources.protect_media.action.delete.send_failure", "error"),
+      }
+    );
+    handleDialogClose();
+  };
+
   return (
     <Fragment>
-      <Button
-        label="resources.protect_media.action.create.name"
-        onClick={handleClick}
-      >
-        <SecurityIcon />
-      </Button>
+      {!record.safe_from_quarantine && !record.quarantined_by && (
+        <Button
+          label="resources.protect_media.action.create.name"
+          onClick={handleProtect}
+          disabled={loading}
+        >
+          <LockIcon />
+        </Button>
+      )}
+      {record.safe_from_quarantine && (
+        <Button
+          label="resources.protect_media.action.delete.name"
+          onClick={handleUnprotect}
+          disabled={loading}
+        >
+          <LockOpenIcon />
+        </Button>
+      )}
+      {/* 
       <Confirm
         isOpen={open}
         loading={loading}
@@ -254,6 +329,7 @@ export const ProtectMediaButton = props => {
           name: record.upload_name || record.id,
         }}
       />
+      */}
     </Fragment>
   );
 };
