@@ -192,9 +192,10 @@ const resourceMap = {
       method: "POST",
     }),
     delete: params => ({
-      endpoint: `/_synapse/admin/v1/media/quarantine/${localStorage.getItem(
+      endpoint: `/_synapse/admin/v1/media/unquarantine/${localStorage.getItem(
         "home_server"
       )}/${params.media_id}`,
+      method: "POST",
     }),
   },
   protect_media: {
@@ -204,7 +205,8 @@ const resourceMap = {
       method: "POST",
     }),
     delete: params => ({
-      endpoint: `/_synapse/admin/v1/media/protect/${params.media_id}`,
+      endpoint: `/_synapse/admin/v1/media/unprotect/${params.media_id}`,
+      method: "POST",
     }),
   },
   servernotices: {
