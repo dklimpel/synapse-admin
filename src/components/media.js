@@ -154,40 +154,28 @@ export const DeleteMediaButton = props => {
 export const QuarantineMediaButton = props => {
   const { record } = props;
   const classes = useStyles(props);
-  const [open, setOpen] = useState(false);
   const refresh = useRefresh();
   const notify = useNotify();
   const [create, { loading }] = useCreate("quarantine_media");
   const [deleteOne] = useDelete("quarantine_media");
 
-  {
-    /*
-  if (!record || record.safe_from_quarantine || record.quarantined_by)
-    return null;
-  */
-  }
-
   if (!record) return null;
-
-  const handleClick = () => setOpen(true);
-  const handleDialogClose = () => setOpen(false);
 
   const handleQuarantaine = () => {
     create(
       { payload: { data: record } },
       {
         onSuccess: () => {
-          notify("resources.quarantine_media.action.create.send_success");
+          notify("resources.quarantine_media.action.send_success");
           refresh();
         },
         onFailure: () =>
           notify(
-            "resources.quarantine_media.action.create.send_failure",
+            "resources.quarantine_media.action.send_failure",
             "error"
           ),
       }
     );
-    handleDialogClose();
   };
 
   const handleRemoveQuarantaine = () => {
@@ -195,24 +183,23 @@ export const QuarantineMediaButton = props => {
       { payload: { record } },
       {
         onSuccess: () => {
-          notify("resources.quarantine_media.action.delete.send_success");
+          notify("resources.quarantine_media.action.send_success");
           refresh();
         },
         onFailure: () =>
           notify(
-            "resources.quarantine_media.action.delete.send_failure",
+            "resources.quarantine_media.action.send_failure",
             "error"
           ),
       }
     );
-    handleDialogClose();
   };
 
   return (
     <Fragment>
       {!record.safe_from_quarantine && !record.quarantined_by && (
         <Button
-          label="resources.quarantine_media.action.create.name"
+          label="resources.quarantine_media.action.create"
           onClick={handleQuarantaine}
           disabled={loading}
           className={classnames("ra-delete-button", classes.deleteButton)}
@@ -222,114 +209,13 @@ export const QuarantineMediaButton = props => {
       )}
       {record.quarantined_by && (
         <Button
-          label="resources.quarantine_media.action.delete.name"
+          label="resources.quarantine_media.action.delete"
           onClick={handleRemoveQuarantaine}
           disabled={loading}
         >
           <BlockIcon />
         </Button>
       )}
-      {/*
-      <Confirm
-        isOpen={open}
-        loading={loading}
-        onConfirm={handleSend}
-        onClose={handleDialogClose}
-        title="resources.quarantine_media.action.create.title"
-        content="resources.quarantine_media.action.create.content"
-        translateOptions={{
-          id: record.id,
-          name: record.upload_name || record.id,
-        }}
-      />
-      */}
-    </Fragment>
-  );
-};
-
-export const ProtectMediaButton = props => {
-  const { record } = props;
-  const [open, setOpen] = useState(false);
-  const refresh = useRefresh();
-  const notify = useNotify();
-  const [create, { loading }] = useCreate("protect_media");
-  const [deleteOne] = useDelete("quarantine_media");
-
-  {
-    /* 
-  if (!record || record.safe_from_quarantine || record.quarantined_by)
-    return null;
-  */
-  }
-  if (!record) return null;
-
-  const handleClick = () => setOpen(true);
-  const handleDialogClose = () => setOpen(false);
-
-  const handleProtect = () => {
-    create(
-      { payload: { data: record } },
-      {
-        onSuccess: () => {
-          notify("resources.protect_media.action.create.send_success");
-          refresh();
-        },
-        onFailure: () =>
-          notify("resources.protect_media.action.create.send_failure", "error"),
-      }
-    );
-    handleDialogClose();
-  };
-
-  const handleUnprotect = () => {
-    deleteOne(
-      { payload: { record } },
-      {
-        onSuccess: () => {
-          notify("resources.protect_media.action.delete.send_success");
-          refresh();
-        },
-        onFailure: () =>
-          notify("resources.protect_media.action.delete.send_failure", "error"),
-      }
-    );
-    handleDialogClose();
-  };
-
-  return (
-    <Fragment>
-      {!record.safe_from_quarantine && !record.quarantined_by && (
-        <Button
-          label="resources.protect_media.action.create.name"
-          onClick={handleProtect}
-          disabled={loading}
-        >
-          <LockIcon />
-        </Button>
-      )}
-      {record.safe_from_quarantine && (
-        <Button
-          label="resources.protect_media.action.delete.name"
-          onClick={handleUnprotect}
-          disabled={loading}
-        >
-          <LockOpenIcon />
-        </Button>
-      )}
-      {/* 
-      <Confirm
-        isOpen={open}
-        loading={loading}
-        onConfirm={handleSend}
-        onClose={handleDialogClose}
-        title="resources.protect_media.action.create.title"
-        content="resources.protect_media.action.create.content"
-        translateOptions={{
-          id: record.id,
-          name: record.upload_name || record.id,
-        }}
-      />
-      */}
     </Fragment>
   );
 };
