@@ -265,7 +265,7 @@ const de = {
     quarantine_media: {
       action: {
         create: "Quarantäne",
-        delete: "Quarantäne-Status entfernen",
+        delete: "Quarantäne aufheben",
         send_success: "Erfolgreich den Quarantäne-Status geändert.",
         send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
       },
