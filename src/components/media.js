@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   BooleanInput,
   Button,
-  Confirm,
   DateTimeInput,
   NumberInput,
   SaveButton,
@@ -24,9 +23,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconCancel from "@material-ui/icons/Cancel";
-import LockIcon from "@material-ui/icons/Lock";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import SecurityIcon from "@material-ui/icons/Security";
 
 const useStyles = makeStyles(
   theme => ({
@@ -170,27 +166,21 @@ export const QuarantineMediaButton = props => {
           refresh();
         },
         onFailure: () =>
-          notify(
-            "resources.quarantine_media.action.send_failure",
-            "error"
-          ),
+          notify("resources.quarantine_media.action.send_failure", "error"),
       }
     );
   };
 
   const handleRemoveQuarantaine = () => {
     deleteOne(
-      { payload: { record } },
+      { payload: { ...record } },
       {
         onSuccess: () => {
           notify("resources.quarantine_media.action.send_success");
           refresh();
         },
         onFailure: () =>
-          notify(
-            "resources.quarantine_media.action.send_failure",
-            "error"
-          ),
+          notify("resources.quarantine_media.action.send_failure", "error"),
       }
     );
   };

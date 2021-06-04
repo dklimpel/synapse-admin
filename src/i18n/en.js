@@ -260,27 +260,10 @@ const en = {
     },
     quarantine_media: {
       action: {
-        create: {
-          name: "Quarantine",
-          title: "Add %{id} to quarantine",
-          content: 'Are you sure you want quarantining "%{name}"?',
-          send_success: "Successfully added to quarantine.",
-          send_failure: "An error has occurred.",
-        },
-        delete: { name: "Unqarantäne" },
-      },
-    },
-    protect_media: {
-      action: {
-        create: {
-          name: "Protect",
-          title: "Protecting %{id} from being quarantined",
-          content:
-            'Are you sure you want to protect "%{name}" from quarantine?',
-          send_success: "Successfully protected from quarantine.",
-          send_failure: "An error has occurred.",
-        },
-        delete: { name: "Unprotect" },
+        create: "Quarantine",
+        delete: "Unquarantine",
+        send_success: "Successfully changed the quarantine status.",
+        send_failure: "An error has occurred.",
       },
     },
     pushers: {

@@ -264,27 +264,10 @@ const de = {
     },
     quarantine_media: {
       action: {
-        create: {
-          name: "Quarantäne",
-          title: "%{id} zur Quarantäne hinzufügen",
-          content: 'Möchten Sie "%{name}" wirklich zur Quarantäne hinzufügen?',
-          send_success: "Erfolgreich zur Quarantäne hinzugefügt.",
-          send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
-        },
-        delete: { name: "Unqarantäne" },
-      },
-    },
-    protect_media: {
-      action: {
-        create: {
-          name: "Schützen",
-          title: "%{id} vor der Quarantäne schützen",
-          content:
-            'Möchten Sie "%{name}" wirklich vor der Quarantäne schützen?',
-          send_success: "Erfolgreich vor der Quarantäne geschützt.",
-          send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
-        },
-        delete: { name: "Unprotect" },
+        create: "Quarantäne",
+        delete: "Quarantäne-Status entfernen",
+        send_success: "Erfolgreich den Quarantäne-Status geändert.",
+        send_failure: "Beim Versenden ist ein Fehler aufgetreten.",
       },
     },
     pushers: {

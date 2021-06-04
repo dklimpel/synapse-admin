@@ -47,7 +47,7 @@ import {
 } from "react-admin";
 import { ServerNoticeButton, ServerNoticeBulkButton } from "./ServerNotices";
 import { DeviceRemoveButton } from "./devices";
-import { ProtectMediaButton, QuarantineMediaButton } from "./media";
+import { QuarantineMediaButton } from "./media";
 import { makeStyles } from "@material-ui/core/styles";
 
 const redirect = (basePath, id, data) => {
@@ -455,7 +455,6 @@ export const UserEdit = props => {
               <TextField source="upload_name" />
               <TextField source="quarantined_by" />
               <BooleanField source="safe_from_quarantine" />
-              <ProtectMediaButton />
               <QuarantineMediaButton />
               <DeleteButton mutationMode="pessimistic" redirect={false} />
             </Datagrid>
