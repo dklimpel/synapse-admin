@@ -1,3 +1,5 @@
+test edit
+
 [![Build Status](https://travis-ci.org/Awesome-Technologies/synapse-admin.svg?branch=master)](https://travis-ci.org/Awesome-Technologies/synapse-admin)
 
 # Synapse admin ui
