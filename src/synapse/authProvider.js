@@ -60,8 +60,11 @@ const authProvider = {
   // called when the API returns an error
   checkError: ({ status }) => {
     console.log("checkError " + status);
-    if (status === 401 || status === 403) {
+    if (status === 401) {
       return Promise.reject();
+    } else if (status === 403) {
+      console.log("checkError Debug3!");
+      return Promise.reject({ message: "Fehler" });
     }
     return Promise.resolve();
   },
