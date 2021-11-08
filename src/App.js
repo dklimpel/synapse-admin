@@ -5,6 +5,7 @@ import authProvider from "./synapse/authProvider";
 import dataProvider from "./synapse/dataProvider";
 import { UserList, UserCreate, UserEdit } from "./components/users";
 import { RoomList, RoomShow } from "./components/rooms";
+import { BgTaskList } from "./components/BgTasks";
 import { ReportList, ReportShow } from "./components/EventReports";
 import LoginPage from "./components/LoginPage";
 import UserIcon from "@material-ui/icons/Group";
@@ -12,6 +13,7 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import { UserMediaStatsList } from "./components/statistics";
 import RoomIcon from "@material-ui/icons/ViewList";
 import ReportIcon from "@material-ui/icons/Warning";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import { ImportFeature } from "./components/ImportFeature";
 import { RoomDirectoryList } from "./components/RoomDirectory";
@@ -66,6 +68,7 @@ const App = () => (
       list={RoomDirectoryList}
       icon={FolderSharedIcon}
     />
+    <Resource name="bg_tasks" list={BgTaskList} icon={ScheduleIcon} />
     <Resource name="connections" />
     <Resource name="devices" />
     <Resource name="room_members" />

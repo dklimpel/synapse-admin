@@ -273,6 +273,17 @@ const resourceMap = {
       method: "PUT",
     }),
   },
+  bg_tasks: {
+    path: "/_synapse/admin/v1/background_updates/status",
+    map: bg => ({
+      ...bg,
+      id: bg.name,
+    }),
+    data: "current_updates",
+    total: json => {
+      return json.total_room_count_estimate;
+    },
+  },
 };
 
 function filterNullValues(key, value) {
