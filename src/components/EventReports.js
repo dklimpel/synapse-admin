@@ -12,7 +12,7 @@ import {
   TextField,
   useTranslate,
 } from "react-admin";
-import PageviewIcon from "@material-ui/icons/Pageview";
+import PageviewIcon from "@material-ui/icons/ViewList";
 import ViewListIcon from "@material-ui/icons/ViewList";
 
 const ReportPagination = props => (

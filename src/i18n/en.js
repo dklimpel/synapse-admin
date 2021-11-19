@@ -95,7 +95,6 @@ const en = {
   },
   resources: {
     users: {
-      backtolist: "Back to list",
       name: "User |||| Users",
       email: "Email",
       msisdn: "Phone",
@@ -120,6 +119,7 @@ const en = {
         creation_ts_ms: "Creation timestamp",
         consent_version: "Consent version",
         auth_provider: "Provider",
+        user_type: "User type",
       },
       helper: {
         deactivate: "You must provide a password to re-activate an account.",
@@ -255,7 +255,8 @@ const en = {
         send_failure: "An error has occurred.",
       },
       helper: {
-        send: "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded. This API will not affect media that has been uploaded to external media repositories.",
+        send:
+          "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded. This API will not affect media that has been uploaded to external media repositories.",
       },
     },
     protect_media: {
@@ -303,7 +304,8 @@ const en = {
         send_failure: "An error has occurred.",
       },
       helper: {
-        send: 'Sends a server notice to the selected users. The feature "Server Notices" has to be activated at the server.',
+        send:
+          'Sends a server notice to the selected users. The feature "Server Notices" has to be activated at the server.',
       },
     },
     user_media_statistics: {

@@ -1,7 +1,7 @@
 {
-  "name": "synapse-admin",
+  "name": "user-type-dev",
   "version": "0.8.3",
-  "description": "Admin GUI for the Matrix.org server Synapse",
+  "description": "",
   "author": "Awesome Technologies Innovationslabor GmbH",
   "license": "Apache-2.0",
   "homepage": ".",
@@ -21,6 +21,7 @@
     "ra-test": "^3.15.0"
   },
   "dependencies": {
+    "@mui/icons-material": "5.1.1",
     "papaparse": "^5.2.0",
     "prop-types": "^15.7.2",
     "ra-language-chinese": "^2.0.10",
@@ -57,5 +58,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "keywords": []
 }
