@@ -285,6 +285,23 @@ const resourceMap = {
     total: json => {
       return json.total;
     },
+    delete: params => ({
+      endpoint: `/_synapse/admin/v1/federation/destinations/${params.id}/reset_connection`,
+      method: "POST",
+    }),
+  },
+  destination_rooms: {
+    map: dstroom => ({
+      ...dstroom,
+      id: dstroom.room_id,
+    }),
+    reference: id => ({
+      endpoint: `/_synapse/admin/v1/federation/destinations/${id}/rooms`,
+    }),
+    data: "rooms",
+    total: json => {
+      return json.total;
+    },
   },
 };
 
@@ -307,8 +324,14 @@ function getSearchOrder(order) {
 const dataProvider = {
   getList: (resource, params) => {
     console.log("getList " + resource);
-    const { user_id, name, guests, deactivated, search_term, destination } =
-      params.filter;
+    const {
+      user_id,
+      name,
+      guests,
+      deactivated,
+      search_term,
+      destination,
+    } = params.filter;
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const from = (page - 1) * perPage;

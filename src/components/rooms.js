@@ -29,7 +29,7 @@ import { Tooltip, Typography, Chip } from "@material-ui/core";
 import FastForwardIcon from "@material-ui/icons/FastForward";
 import HttpsIcon from "@material-ui/icons/Https";
 import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
-import PageviewIcon from "@material-ui/icons/Pageview";
+import PageviewIcon from "@material-ui/icons/NoEncryption";
 import UserIcon from "@material-ui/icons/Group";
 import ViewListIcon from "@material-ui/icons/ViewList";
 import VisibilityIcon from "@material-ui/icons/Visibility";
