@@ -68,13 +68,6 @@ export const DestinationShow = props => {
   return (
     <Show {...props}>
       <TabbedShowLayout>
-        <Tab label="basic" icon={<ViewListIcon />}>
-          <TextField source="destination" />
-          <DateField source="failure_ts" showTime options={date_format} />
-          <DateField source="retry_last_ts" showTime options={date_format} />
-          <TextField source="retry_interval" />
-          <TextField source="last_successful_stream_ordering" />
-        </Tab>
         <Tab label="rooms" icon={<FolderSharedIcon />}>
           <ReferenceManyField
             reference="destination_rooms"
@@ -106,6 +99,13 @@ export const DestinationShow = props => {
               </ReferenceField>
             </Datagrid>
           </ReferenceManyField>
+        </Tab>
+        <Tab label="status" icon={<ViewListIcon />}>
+          <TextField source="destination" />
+          <DateField source="failure_ts" showTime options={date_format} />
+          <DateField source="retry_last_ts" showTime options={date_format} />
+          <TextField source="retry_interval" />
+          <TextField source="last_successful_stream_ordering" />
         </Tab>
       </TabbedShowLayout>
     </Show>
