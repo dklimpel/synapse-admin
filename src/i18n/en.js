@@ -255,7 +255,8 @@ const en = {
         send_failure: "An error has occurred.",
       },
       helper: {
-        send: "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded. This API will not affect media that has been uploaded to external media repositories.",
+        send:
+          "This API deletes the local media from the disk of your own server. This includes any local thumbnails and copies of media downloaded. This API will not affect media that has been uploaded to external media repositories.",
       },
     },
     protect_media: {
@@ -303,7 +304,8 @@ const en = {
         send_failure: "An error has occurred.",
       },
       helper: {
-        send: 'Sends a server notice to the selected users. The feature "Server Notices" has to be activated at the server.',
+        send:
+          'Sends a server notice to the selected users. The feature "Server Notices" has to be activated at the server.',
       },
     },
     user_media_statistics: {
@@ -356,7 +358,9 @@ const en = {
         retry_last_ts: "Last retry timestamp",
         retry_interval: "Retry interval",
         last_successful_stream_ordering: "Last successful stream",
+        stream_ordering: "Stream",
       },
+      action: { reconnect: "Reconnect" },
     },
   },
 };

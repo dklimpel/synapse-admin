@@ -13,6 +13,8 @@ import {
   Tab,
   TabbedShowLayout,
   TextField,
+  TopToolbar,
+  useTranslate,
 } from "react-admin";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
@@ -43,6 +45,27 @@ const DestinationFilter = ({ ...props }) => {
   );
 };
 
+const DestinationShowActions = ({ basePath, data, resource }) => (
+  <TopToolbar>
+    <DeleteButton
+      basePath={basePath}
+      record={data}
+      icon={<AutorenewIcon />}
+      label="resources.destinations.action.reconnect"
+    />
+  </TopToolbar>
+);
+
+const DestinationTitle = ({ record }) => {
+  const translate = useTranslate();
+
+  return (
+    <span>
+      {translate("resources.destinations.name", 1)} {record.destination}
+    </span>
+  );
+};
+
 export const DestinationList = props => {
   return (
     <List
@@ -52,44 +75,66 @@ export const DestinationList = props => {
       sort={{ field: "destination", order: "ASC" }}
       bulkActionButtons={false}
     >
-      <Datagrid rowClick="show" rowStyle={destinationRowStyle}>
+      <Datagrid
+        rowStyle={destinationRowStyle}
+        rowClick={(id, basePath, record) =>
+          "/destinations/" + id + "/show/rooms"
+        }
+      >
         <TextField source="destination" />
         <DateField source="failure_ts" showTime options={date_format} />
         <DateField source="retry_last_ts" showTime options={date_format} />
         <TextField source="retry_interval" />
         <TextField source="last_successful_stream_ordering" />
-        <DeleteButton icon={<AutorenewIcon />} label="Reconnect" />
+        <DeleteButton
+          icon={<AutorenewIcon />}
+          label="resources.destinations.action.reconnect"
+        />
       </Datagrid>
     </List>
   );
 };
 
 export const DestinationShow = props => {
+  const translate = useTranslate();
+
   return (
-    <Show {...props}>
+    <Show
+      actions={<DestinationShowActions />}
+      title={<DestinationTitle />}
+      {...props}
+    >
       <TabbedShowLayout>
-        <Tab label="rooms" icon={<FolderSharedIcon />}>
+        <Tab label="status" icon={<ViewListIcon />}>
+          <TextField source="destination" />
+          <DateField source="failure_ts" showTime options={date_format} />
+          <DateField source="retry_last_ts" showTime options={date_format} />
+          <TextField source="retry_interval" />
+          <TextField source="last_successful_stream_ordering" />
+        </Tab>
+        <Tab
+          label={translate("resources.rooms.name", { smart_count: 2 })}
+          icon={<FolderSharedIcon />}
+          path="rooms"
+        >
           <ReferenceManyField
             reference="destination_rooms"
             target="destination"
             addLabel={false}
+            pagination={<DestinationPagination />}
+            perPage={50}
           >
             <Datagrid
               style={{ width: "100%" }}
-              rowClick={(id, basePath, record) => "/rooms/" + id}
+              rowClick={(id, basePath, record) => "/rooms/" + id + "/show"}
             >
               <TextField
                 source="room_id"
-                sortable={false}
-                label="resources.users.fields.id"
+                label="resources.rooms.fields.room_id"
               />
-              <TextField
-                source="stream_ordering"
-                sortable={false}
-                label="resources.users.fields.id"
-              />
+              <TextField source="stream_ordering" sortable={false} />
               <ReferenceField
-                label="resources.users.fields.displayname"
+                label="resources.rooms.fields.name"
                 source="id"
                 reference="rooms"
                 sortable={false}
@@ -99,13 +144,6 @@ export const DestinationShow = props => {
               </ReferenceField>
             </Datagrid>
           </ReferenceManyField>
-        </Tab>
-        <Tab label="status" icon={<ViewListIcon />}>
-          <TextField source="destination" />
-          <DateField source="failure_ts" showTime options={date_format} />
-          <DateField source="retry_last_ts" showTime options={date_format} />
-          <TextField source="retry_interval" />
-          <TextField source="last_successful_stream_ordering" />
         </Tab>
       </TabbedShowLayout>
     </Show>
