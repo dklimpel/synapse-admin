@@ -3,6 +3,7 @@ import {
   Datagrid,
   DateField,
   DeleteButton,
+  ExportButton,
   Filter,
   List,
   Pagination,
@@ -52,13 +53,14 @@ const DestinationShowActions = ({ basePath, data, resource }) => (
       record={data}
       icon={<AutorenewIcon />}
       label="resources.destinations.action.reconnect"
+      redirect={false}
     />
+    <ExportButton />
   </TopToolbar>
 );
 
 const DestinationTitle = ({ record }) => {
   const translate = useTranslate();
-
   return (
     <span>
       {translate("resources.destinations.name", 1)} {record.destination}
@@ -89,6 +91,7 @@ export const DestinationList = props => {
         <DeleteButton
           icon={<AutorenewIcon />}
           label="resources.destinations.action.reconnect"
+          redirect={false}
         />
       </Datagrid>
     </List>
@@ -97,7 +100,6 @@ export const DestinationList = props => {
 
 export const DestinationShow = props => {
   const translate = useTranslate();
-
   return (
     <Show
       actions={<DestinationShowActions />}
@@ -112,6 +114,7 @@ export const DestinationShow = props => {
           <TextField source="retry_interval" />
           <TextField source="last_successful_stream_ordering" />
         </Tab>
+
         <Tab
           label={translate("resources.rooms.name", { smart_count: 2 })}
           icon={<FolderSharedIcon />}
