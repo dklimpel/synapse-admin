@@ -82,7 +82,7 @@ export const ServerNoticeButton = ({ record }) => {
         },
         onFailure: () =>
           notify("resources.servernotices.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -130,7 +130,7 @@ export const ServerNoticeBulkButton = ({ selectedIds }) => {
         },
         onFailure: error =>
           notify("resources.servernotices.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
