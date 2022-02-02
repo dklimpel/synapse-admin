@@ -69,7 +69,8 @@ export const DestinationDeleteButton = ({ record }) => {
     );
   };
 
-  if (record !== undefined && record.failure_ts) {
+  if (record !== undefined) {
+    //&& record.failure_ts
     return (
       <Button
         label="resources.destinations.action.reconnect"
