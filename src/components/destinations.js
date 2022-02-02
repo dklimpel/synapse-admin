@@ -3,8 +3,6 @@ import {
   Button,
   Datagrid,
   DateField,
-  DeleteButton,
-  ExportButton,
   Filter,
   List,
   Pagination,
@@ -17,6 +15,8 @@ import {
   TextField,
   TopToolbar,
   useDelete,
+  useNotify,
+  useRefresh,
   useTranslate,
 } from "react-admin";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
@@ -49,25 +49,43 @@ const DestinationFilter = ({ ...props }) => {
 };
 
 export const DestinationDeleteButton = ({ record }) => {
+  const refresh = useRefresh();
+  const notify = useNotify();
   const translate = useTranslate();
-  const [handleReconnect, { isLoading }] = useDelete("destinations", record.id);
-  const visible = record.failure_ts;
+  const [handleReconnect, { isLoading }] = useDelete("destinations");
 
-  return (
-    <Button
-      label="resources.destinations.action.reconnect"
-      onClick={handleReconnect}
-      disabled={isLoading}
-    >
-      <AutorenewIcon />
-    </Button>
-  );
+  const handleClick = () => {
+    handleReconnect(
+      { payload: { id: record.id } },
+      {
+        onSuccess: () => {
+          notify("ra.notification.updated");
+          refresh();
+        },
+        onFailure: () => {
+          notify("ra.message.error", "error");
+        },
+      }
+    );
+  };
+
+  if (record !== undefined && record.failure_ts) {
+    return (
+      <Button
+        label="resources.destinations.action.reconnect"
+        onClick={handleClick}
+        disabled={isLoading}
+      >
+        <AutorenewIcon />
+      </Button>
+    );
+  }
+  return null;
 };
 
 const DestinationShowActions = ({ basePath, data, resource }) => (
   <TopToolbar>
     <DestinationDeleteButton record={data} />
-    <ExportButton />
   </TopToolbar>
 );
 
