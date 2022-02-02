@@ -59,11 +59,13 @@ export const DestinationDeleteButton = ({ record }) => {
       { payload: { id: record.id } },
       {
         onSuccess: () => {
-          notify("ra.notification.updated");
+          notify("ra.notification.updated", {
+            messageArgs: { smart_count: 1 },
+          });
           refresh();
         },
         onFailure: () => {
-          notify("ra.message.error", "error");
+          notify("ra.message.error", { type: "error" });
         },
       }
     );
