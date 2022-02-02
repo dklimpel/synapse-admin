@@ -14,6 +14,7 @@ import {
   TabbedShowLayout,
   TextField,
   TopToolbar,
+  useRecordContext,
   useDelete,
   useNotify,
   useRefresh,
@@ -49,7 +50,7 @@ const DestinationFilter = ({ ...props }) => {
 };
 
 export const DestinationDeleteButton = props => {
-  const { record } = props;
+  const record = useRecordContext(props);
   const refresh = useRefresh();
   const notify = useNotify();
   const [handleReconnect, { isLoading }] = useDelete("destinations");
@@ -91,7 +92,7 @@ const DestinationShowActions = ({ basePath, data, resource }) => (
 );
 
 const DestinationTitle = props => {
-  const { record } = props;
+  const record = useRecordContext(props);
   const translate = useTranslate();
   return (
     <span>
