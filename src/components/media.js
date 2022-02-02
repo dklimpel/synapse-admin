@@ -128,7 +128,7 @@ export const DeleteMediaButton = props => {
         },
         onFailure: () =>
           notify("resources.delete_media.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -173,7 +173,7 @@ export const ProtectMediaButton = props => {
         },
         onFailure: () =>
           notify("resources.protect_media.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -189,7 +189,7 @@ export const ProtectMediaButton = props => {
         },
         onFailure: () =>
           notify("resources.protect_media.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -269,7 +269,7 @@ export const QuarantineMediaButton = props => {
         },
         onFailure: () =>
           notify("resources.quarantine_media.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -285,7 +285,7 @@ export const QuarantineMediaButton = props => {
         },
         onFailure: () =>
           notify("resources.quarantine_media.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
