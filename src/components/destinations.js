@@ -48,11 +48,13 @@ const DestinationFilter = ({ ...props }) => {
   );
 };
 
-export const DestinationDeleteButton = ({ record }) => {
+export const DestinationDeleteButton = props => {
+  const { record } = props;
   const refresh = useRefresh();
   const notify = useNotify();
-  const translate = useTranslate();
   const [handleReconnect, { isLoading }] = useDelete("destinations");
+
+  if (!record || !record.failure_ts) return null;
 
   const handleClick = () => {
     handleReconnect(
@@ -71,19 +73,15 @@ export const DestinationDeleteButton = ({ record }) => {
     );
   };
 
-  if (record !== undefined) {
-    //&& record.failure_ts
-    return (
-      <Button
-        label="resources.destinations.action.reconnect"
-        onClick={handleClick}
-        disabled={isLoading}
-      >
-        <AutorenewIcon />
-      </Button>
-    );
-  }
-  return null;
+  return (
+    <Button
+      label="resources.destinations.action.reconnect"
+      onClick={handleClick}
+      disabled={isLoading}
+    >
+      <AutorenewIcon />
+    </Button>
+  );
 };
 
 const DestinationShowActions = ({ basePath, data, resource }) => (
@@ -92,7 +90,8 @@ const DestinationShowActions = ({ basePath, data, resource }) => (
   </TopToolbar>
 );
 
-const DestinationTitle = ({ record }) => {
+const DestinationTitle = props => {
+  const { record } = props;
   const translate = useTranslate();
   return (
     <span>
