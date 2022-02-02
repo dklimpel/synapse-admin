@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Datagrid,
   DateField,
   DeleteButton,
@@ -15,6 +16,7 @@ import {
   TabbedShowLayout,
   TextField,
   TopToolbar,
+  useDelete,
   useTranslate,
 } from "react-admin";
 import AutorenewIcon from "@material-ui/icons/Autorenew";
@@ -46,15 +48,25 @@ const DestinationFilter = ({ ...props }) => {
   );
 };
 
+export const DestinationDeleteButton = ({ record }) => {
+  const translate = useTranslate();
+  const [handleReconnect, { isLoading }] = useDelete("destinations", record.id);
+  const visible = record.failure_ts;
+
+  return (
+    <Button
+      label="resources.destinations.action.reconnect"
+      onClick={handleReconnect}
+      disabled={isLoading}
+    >
+      <AutorenewIcon />
+    </Button>
+  );
+};
+
 const DestinationShowActions = ({ basePath, data, resource }) => (
   <TopToolbar>
-    <DeleteButton
-      basePath={basePath}
-      record={data}
-      icon={<AutorenewIcon />}
-      label="resources.destinations.action.reconnect"
-      redirect={false}
-    />
+    <DestinationDeleteButton record={data} />
     <ExportButton />
   </TopToolbar>
 );
@@ -88,11 +100,7 @@ export const DestinationList = props => {
         <DateField source="retry_last_ts" showTime options={date_format} />
         <TextField source="retry_interval" />
         <TextField source="last_successful_stream_ordering" />
-        <DeleteButton
-          icon={<AutorenewIcon />}
-          label="resources.destinations.action.reconnect"
-          redirect={false}
-        />
+        <DestinationDeleteButton />
       </Datagrid>
     </List>
   );
