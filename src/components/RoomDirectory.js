@@ -88,7 +88,7 @@ export const RoomDirectoryBulkSaveButton = ({ selectedIds }) => {
         },
         onFailure: error =>
           notify("resources.room_directory.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
@@ -122,7 +122,7 @@ export const RoomDirectorySaveButton = ({ record }) => {
         },
         onFailure: error =>
           notify("resources.room_directory.action.send_failure", {
-            type: "error"
+            type: "error",
           }),
       }
     );
