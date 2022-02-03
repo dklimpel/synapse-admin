@@ -49,8 +49,8 @@ const DestinationFilter = ({ ...props }) => {
   );
 };
 
-export const DestinationDeleteButton = props => {
-  const record = useRecordContext(props);
+export const DestinationReconnectButton = props => {
+  const record = useRecordContext();
   const refresh = useRefresh();
   const notify = useNotify();
   const [handleReconnect, { isLoading }] = useDelete("destinations");
@@ -85,14 +85,14 @@ export const DestinationDeleteButton = props => {
   );
 };
 
-const DestinationShowActions = ({ basePath, data, resource }) => (
+const DestinationShowActions = props => (
   <TopToolbar>
-    <DestinationDeleteButton record={data} />
+    <DestinationReconnectButton />
   </TopToolbar>
 );
 
 const DestinationTitle = props => {
-  const record = useRecordContext(props);
+  const record = useRecordContext();
   const translate = useTranslate();
   return (
     <span>
@@ -121,7 +121,7 @@ export const DestinationList = props => {
         <DateField source="retry_last_ts" showTime options={date_format} />
         <TextField source="retry_interval" />
         <TextField source="last_successful_stream_ordering" />
-        <DestinationDeleteButton />
+        <DestinationReconnectButton />
       </Datagrid>
     </List>
   );
