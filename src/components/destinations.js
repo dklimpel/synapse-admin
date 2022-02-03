@@ -20,6 +20,7 @@ import {
   useRefresh,
   useTranslate,
 } from "react-admin";
+
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import ViewListIcon from "@material-ui/icons/ViewList";
@@ -55,9 +56,13 @@ export const DestinationReconnectButton = props => {
   const notify = useNotify();
   const [handleReconnect, { isLoading }] = useDelete("destinations");
 
+  // Reconnect is not required if no error has occurred. (`failure_ts`)
   if (!record || !record.failure_ts) return null;
 
-  const handleClick = () => {
+  const handleClick = e => {
+    // Prevents redirection to the detail page when clicking in the list
+    e.stopPropagation();
+
     handleReconnect(
       { payload: { id: record.id } },
       {
