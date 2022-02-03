@@ -20,7 +20,6 @@ import {
   useRefresh,
   useTranslate,
 } from "react-admin";
-
 import AutorenewIcon from "@material-ui/icons/Autorenew";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import ViewListIcon from "@material-ui/icons/ViewList";
@@ -117,9 +116,7 @@ export const DestinationList = props => {
     >
       <Datagrid
         rowStyle={destinationRowStyle}
-        rowClick={(id, basePath, record) =>
-          "/destinations/" + id + "/show/rooms"
-        }
+        rowClick={(id, basePath, record) => `${basePath}/${id}/show/rooms`}
       >
         <TextField source="destination" />
         <DateField source="failure_ts" showTime options={date_format} />
