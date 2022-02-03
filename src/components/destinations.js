@@ -160,7 +160,7 @@ export const DestinationShow = props => {
           >
             <Datagrid
               style={{ width: "100%" }}
-              rowClick={(id, basePath, record) => "/rooms/" + id + "/show"}
+              rowClick={(id, basePath, record) => `/rooms/${id}/show`}
             >
               <TextField
                 source="room_id"
