@@ -4,6 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+    # The update of react-admin has breaking changes
+      - dependency-name: "react-admin"
 
   - package-ecosystem: "docker"
     directory: "/"
