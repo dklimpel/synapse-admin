@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      # Major updates of react-admin have breaking changes
+      # Major updates for react-admin have breaking changes
       - dependency-name: "react-admin"
         update-types: ["version-update:semver-major"]
 
