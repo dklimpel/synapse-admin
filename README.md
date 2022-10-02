@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/Awesome-Technologies/synapse-admin.svg?branch=master)](https://travis-ci.org/Awesome-Technologies/synapse-admin)
 [![build-test](https://github.com/Awesome-Technologies/synapse-admin/actions/workflows/build-test.yml/badge.svg)](https://github.com/Awesome-Technologies/synapse-admin/actions/workflows/build-test.yml)
 
+|support| |development| |documentation| |license|
+
 # Synapse admin ui
 
 This project is built using [react-admin](https://marmelab.com/react-admin/).
