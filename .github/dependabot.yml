@@ -5,8 +5,9 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-    # The update of react-admin has breaking changes
+      # Major updates of react-admin have breaking changes
       - dependency-name: "react-admin"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "docker"
     directory: "/"
