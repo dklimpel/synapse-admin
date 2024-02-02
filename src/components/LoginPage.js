@@ -266,7 +266,7 @@ const LoginPage = () => {
       <>
         <TextInput
           autoFocus
-          name="username"
+          source="username"
           component={renderInput}
           label="ra.auth.username"
           disabled={loading || !supportPassAuth}
@@ -276,7 +276,7 @@ const LoginPage = () => {
           className="input"
         />
         <PasswordInput
-          name="password"
+          source="password"
           component={renderInput}
           label="ra.auth.password"
           type="password"
@@ -286,7 +286,7 @@ const LoginPage = () => {
           className="input"
         />
         <TextInput
-          name="base_url"
+          source="base_url"
           component={renderInput}
           label="synapseadmin.auth.base_url"
           disabled={cfg_base_url || loading}
