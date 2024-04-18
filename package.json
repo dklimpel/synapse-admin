@@ -44,7 +44,7 @@
     "prettier": "prettier --ignore-path .gitignore \"**/*.{js,jsx,json,md,scss,yaml,yml}\"",
     "test:code": "react-scripts test",
     "test:lint": "eslint --ignore-path .gitignore --ext .js,.jsx .",
-    "test:style": "yarn prettier --list-different",
+    "test:style": "yarn prettier --check",
     "test": "yarn test:style && yarn test:lint && yarn test:code",
     "eject": "react-scripts eject"
   },
