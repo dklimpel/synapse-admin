@@ -12,6 +12,7 @@ describe("App", () => {
         <App />
       </MemoryRouter>
     );
-    await screen.findAllByText("Welcome to Synapse-admin");
+    const heading = await await screen.findAllByText("Welcome to Synapse-admin");
+    expect(heading).toBeInTheDocument();
   });
 });
