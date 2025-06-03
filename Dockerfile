@@ -1,3 +1,4 @@
+
 # Builder
 FROM node:lts AS builder
 LABEL org.opencontainers.image.url=https://github.com/Awesome-Technologies/synapse-admin org.opencontainers.image.source=https://github.com/Awesome-Technologies/synapse-admin
